@@ -1,9 +1,5 @@
 ---
-// Visible "confirm with gym" marker (build script 7.14).
-// Always rendered visibly in this pre-launch build; `npm run build:launch` fails while any remain.
+// Open "confirm with gym" notes. Placeholders are NOT rendered on the live site;
+// the `note` prop stays in the source as a to-do list. Find them with `rg "<Placeholder"`.
 interface Props { note: string; inline?: boolean; class?: string }
-const { note, inline = false, class: cls = '' } = Astro.props;
 ---
-{inline
-  ? <span class={`placeholder-inline ${cls}`} data-placeholder>⚠ PLACEHOLDER - confirm with gym: {note}</span>
-  : <div class={`placeholder-box ${cls}`} role="note" data-placeholder>⚠ PLACEHOLDER - confirm with gym: {note}</div>}
