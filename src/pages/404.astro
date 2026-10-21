@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ConfettiDots from '../components/ConfettiDots.astro';
+import WaveDivider from '../components/WaveDivider.astro';
+import Placeholder from '../components/Placeholder.astro';
+import Img from '../components/Img.astro';
+---
+<BaseLayout title="Page not found | Stoughton Gymnastics" noindex>
+  <section class="relative overflow-hidden bg-gym-purple text-white">
+    <ConfettiDots class="absolute right-4 top-6 w-40" />
+    <ConfettiDots class="absolute bottom-16 left-4 w-36" variant="b" />
+    <div class="container-x relative grid items-center gap-10 py-16 md:grid-cols-[1.2fr_1fr]">
+      <div>
+        <h1 class="text-white">Page not found</h1>
+        <Placeholder note="optional fun line for this page (e.g. a 'backflip' joke), pending gym approval" />
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+          <a href="/" class="btn btn-on-dark">Home</a>
+          <a href="/classes-offered" class="btn btn-outline-dark">Classes Offered</a>
+          <a href="/contact" class="btn btn-outline-dark">Contact</a>
+        </div>
+      </div>
+      <div class="polaroid tilt-r mx-auto w-full max-w-[320px]"><Img src="photos/photos-01-split-leap-on-tumble-track.jpg" alt="Gymnast doing a split leap above the tumble track" sizes="320px" maxWidth={800} class="aspect-square w-full object-cover" /></div>
+    </div>
+    <WaveDivider fill="#ffffff" />
+  </section>
+</BaseLayout>

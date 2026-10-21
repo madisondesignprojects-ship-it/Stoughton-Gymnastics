@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Placeholder from '../components/Placeholder.astro';
+import Icon from '../components/Icon.astro';
+import md from '../content/policies.md?raw';
+import { site, tel } from '../lib/site';
+
+type Item = { title: string; id: string; paras: string[]; ph: string[] };
+type Group = { title: string; id: string; items: Item[] };
+const groups: Group[] = [];
+const body = md.replace(/<!--[\s\S]*?-->/g, '');
+for (const block of body.split(/\n(?=# )/)) {
+  const g = block.match(/^# (.+?) \{#(.+?)\}/m);
+  if (!g) continue;
+  const group: Group = { title: g[1], id: g[2], items: [] };
+  for (const it of block.split(/\n(?=## )/).slice(1)) {
+    const h = it.match(/^## (.+?) \{#(.+?)\}/)!;
+    const lines = it.split('\n').slice(1);
+    const ph = lines.filter((l) => l.startsWith('!PH ')).map((l) => l.slice(4));
+    const paras = lines.filter((l) => !l.startsWith('!PH ')).join('\n').split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+    group.items.push({ title: h[1], id: h[2], paras, ph });
+  }
+  groups.push(group);
+}
+const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+---
+<BaseLayout title="Tuition & Policies | Stoughton Gymnastics"
+  description="Monthly billing, withdrawal, discounts, payment, attendance, make-up, attire, weather and closing policies for classes at Stoughton Gymnastics.">
+  <PageHero title="Tuition & Policies" crumbs={[{ label: 'Class Schedule', href: '/class-schedule' }, { label: 'Tuition & Policies' }]} />
+
+  <!-- Mobile chip index -->
+  <nav aria-label="On this page" class="no-scrollbar sticky top-16 z-20 -mt-2 overflow-x-auto border-b border-purple-100 bg-white/95 backdrop-blur lg:hidden">
+    <ul class="flex w-max gap-2 px-5 py-3">
+      {groups.flatMap((g) => g.items).map((it) => <li><a href={`#${it.id}`} class="chip chip-ice min-h-10 whitespace-nowrap">{it.title}</a></li>)}
+    </ul>
+  </nav>
+
+  <div class="container-x section pt-8 lg:pt-12">
+    <Placeholder note="policies below are from the 2023 site; confirm they are current before launch (the live Tuition & Policies page is blank)" />
+    <div class="mt-6 grid gap-10 lg:grid-cols-[260px_1fr]">
+      <aside class="hidden lg:block">
+        <nav aria-label="On this page" class="sticky top-32 rounded-[24px] bg-purple-50 p-5">
+          <p class="eyebrow mb-3">On this page</p>
+          {groups.map((g) => (
+            <div class="mb-4">
+              <a href={`#${g.id}`} class="font-extrabold text-gym-purple hover:underline">{g.title}</a>
+              <ul class="mt-1 space-y-0.5 border-l-2 border-purple-100 pl-3 text-[0.92rem]">
+                {g.items.map((it) => <li><a href={`#${it.id}`} class="block py-0.5 text-purple-700 hover:text-teal-700 hover:underline">{it.title}</a></li>)}
+              </ul>
+            </div>
+          ))}
+        </nav>
+      </aside>
+      <div class="min-w-0 space-y-14" data-desktop-open>
+        {groups.map((g, gi) => (
+          <section aria-labelledby={g.id}>
+            <div class="flex flex-wrap items-end justify-between gap-3">
+              <h2 id={g.id}>{g.title}</h2>
+              <button type="button" class="btn btn-secondary btn-sm" data-expand-all={`grp-${g.id}`} aria-pressed="false">Expand all</button>
+            </div>
+            <div id={`grp-${g.id}`} class="mt-6 space-y-3">
+              {g.items.map((it, ii) => {
+                const weather = it.id === 'weather-policy';
+                return (
+                  <details id={it.id} class={`acc ${weather ? 'bg-ice ring-2 ring-teal/30' : ''}`} open={gi === 0 && ii === 0}>
+                    <summary>
+                      <span class="flex items-center gap-3">{weather && <span class="icon-circle bg-white"><Icon name="snowflake" /></span>}{it.title}</span>
+                      <Icon name="chevron-down" class="chev shrink-0 text-plum" />
+                    </summary>
+                    <div class="acc-body">
+                      {it.paras.map((p) => <p set:html={esc(p).replace(/information@stoughtongymnastics\.com/, `<a class="link" href="mailto:${site.email}">information@stoughtongymnastics.com</a>`)} />)}
+                      {it.id === 'closed-dates' && <p class="mt-3"><a href="/calendar" class="link inline-flex items-center gap-1">See the Calendar <Icon name="arrow-right" size={16} /></a></p>}
+                      {weather && <a href={site.facebook} target="_blank" rel="noopener" class="btn btn-primary btn-sm mt-4"><Icon name="facebook" size={18} />Check Facebook for closings<span class="sr-only">(opens in new tab)</span></a>}
+                      {it.ph.map((n) => <Placeholder note={n} />)}
+                      <Placeholder inline note="2023 archived text" class="mt-3" />
+                    </div>
+                  </details>
+                );
+              })}
+            </div>
+          </section>
+        ))}
+        <p class="text-center text-lg font-bold lg:text-left">Questions? <a href={tel} class="link">Call (608) 88 VAULT</a></p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,41 @@
+{
+  "secondClassNote": "(ADD a second class day for 50% off)",
+  "home": [
+    { "id": "preschool", "title": "Pre-School", "ages": "ages 2-4's", "price": "$50/month", "body": "Pre-School, ages 2-4's. $50/month", "href": "/classes-offered#preschool", "image": "photos/photos-02-preschool-class-on-mats-with-tunnel.jpg", "imageAlt": "Pre-school gymnasts and a parent sitting on colorful mats near a play tunnel" },
+    { "id": "preschool-independent", "title": "Pre-School, Independent Gymnastics", "ages": "ages 4 - 5", "price": "$69.50/mo", "body": "Pre-School, Independent Gymnastics, ages 4 - 5. $69.50/mo", "href": "/classes-offered#preschool-independent", "image": "photos/photos-04-toddler-hanging-on-bar.jpg", "imageAlt": "Young child hanging from a gymnastics bar above colorful mats" },
+    { "id": "recreational", "title": "Recreational Gymnastics", "ages": "ages 5 and older", "price": "from $69.50/mo", "body": "Fees vary based on class length, from $69.50/mo", "href": "/classes-offered#recreational", "image": "photos/photos-12-kids-class-on-floor.jpg", "imageAlt": "Recreational gymnastics class practicing on the blue floor" },
+    { "id": "xcel", "title": "XCEL Competition Team", "ages": null, "price": null, "body": "USAG and AAU levels include Copper, Bronze, Silver, Gold, Platinum, Diamond. Competitive team members practice 2 x per week, ranging from 75-120 minutes per class.", "medals": true, "href": "/team-gymnastics", "image": "team-gymnastics/team-03-team-with-wisconsin-sign.jpg", "imageAlt": "Stoughton XCEL team gymnasts in purple leotards holding a Wisconsin sign" },
+    { "id": "ninja", "title": "Ninja Warrior", "ages": "ages 4 -13", "price": "$69.50/month", "body": "Ninja Warrior, ages 4 -13.  $69.50/month", "href": "/classes-offered#ninja", "image": "photos/photos-05-boy-on-rings.jpg", "imageAlt": "Smiling boy hanging on gymnastics rings" },
+    { "id": "inhouse-xcel", "title": "In-House XCEL Team", "team": true, "href": "/team-gymnastics" },
+    { "id": "rec-team", "title": "Recreational Gymnastics Team", "team": true, "href": "/team-gymnastics" }
+  ],
+  "summary": [
+    { "program": "Pre-School", "ages": "ages 2-4's", "price": "$50/month", "notes": "" },
+    { "program": "Pre-School, Independent Gymnastics", "ages": "ages 4 - 5", "price": "$69.50/mo", "notes": "" },
+    { "program": "Recreational Gymnastics", "ages": "ages 5 and older", "price": "from $69.50/mo", "notes": "Fees vary based on class length" },
+    { "program": "XCEL Competition Team", "ages": "", "price": "", "notes": "USAG and AAU levels include Copper, Bronze, Silver, Gold, Platinum, Diamond. Competitive team members practice 2 x per week, ranging from 75-120 minutes per class." },
+    { "program": "Ninja Warrior", "ages": "ages 4 -13", "price": "$69.50/month", "notes": "" },
+    { "program": "In-House XCEL Team", "ages": "", "price": "", "notes": "" },
+    { "program": "Recreational Gymnastics Team", "ages": "", "price": "", "notes": "" }
+  ],
+  "classes": [
+    { "id": "preschool", "title": "Pre-School", "heading": "Pre-School: Ages 2-3 & Ages 3-4", "chips": ["Ages 2-3", "Ages 3-4"], "price": "$50/month",
+      "body": "Classes are 30 minutes in length, Parent participation is required in the 2-3 yr old classes. Classes are held in the Circus Pre-School room, with 4-5 students per class.",
+      "facts": [["clock", "30 minutes"], ["users", "Parent participation required (2-3 yr olds)"], ["map-pin", "Circus Pre-School room"], ["users", "4-5 students per class"]],
+      "image": "photos/photos-02-preschool-class-on-mats-with-tunnel.jpg", "imageAlt": "Pre-school gymnasts and a parent sitting on colorful mats near a play tunnel" },
+    { "id": "preschool-independent", "title": "Pre-School Independent Gymnastics", "heading": "Pre-School Independent Gymnastics: Ages 4-5.", "chips": ["Ages 4-5"], "price": "$69.50/mo",
+      "body": "Classes are fully independent, 40-45 minutes in length held in the main gym. Students will use regulation gymnastics equipment.",
+      "image": "photos/photos-04-toddler-hanging-on-bar.jpg", "imageAlt": "Young child hanging from a gymnastics bar above colorful mats" },
+    { "id": "recreational", "title": "Gymnastics, Recreational", "heading": "Gymnastics, Recreational: Ages 4-18", "chips": ["Ages 4-18"], "price": "from $69.50/mo", "priceNote": "Fees vary based on class length",
+      "body": "Classes are 45-60 minutes in length, depending on age and skill attainment",
+      "image": "photos/photos-12-kids-class-on-floor.jpg", "imageAlt": "Recreational gymnastics class practicing on the blue floor" },
+    { "id": "team", "title": "Team Gymnastics", "heading": "Team Gymnastics:", "chips": [], "price": null,
+      "body": "XCEL Competitive Gymnastics is offered. Current levels include: Copper, Bronze, Silver, Gold, Platinum and Diamond. XCEL gymnasts practice 2 days per week with practice times ranging from 75-120 minutes depending on XCEL level.",
+      "medals": true, "link": { "href": "/team-gymnastics", "label": "Team Gymnastics" },
+      "image": "team-gymnastics/team-03-team-with-wisconsin-sign.jpg", "imageAlt": "Stoughton XCEL team gymnasts in purple leotards holding a Wisconsin sign" },
+    { "id": "ninja", "title": "Ninja Warrior", "heading": "Ninja Warrior", "chips": ["ages 4 -13"], "price": "$69.50/month",
+      "body": "This is a fast-moving class that keeps kids moving by working on balance & strength in FUN activities. Circuits to include: trampoline, obstacle courses, bars, and friendly physical challenges.",
+      "circuits": ["trampoline", "obstacle courses", "bars", "friendly physical challenges"],
+      "image": "photos/photos-05-boy-on-rings.jpg", "imageAlt": "Smiling boy hanging on gymnastics rings" }
+  ]
+}

@@ -1,0 +1,20 @@
+---
+import { site } from '../lib/site';
+const data = {
+  '@context': 'https://schema.org',
+  '@type': ['SportsActivityLocation', 'LocalBusiness'],
+  '@id': 'https://www.stoughtongymnastics.com/#business',
+  name: site.name,
+  legalName: site.legalName,
+  description: site.tagline,
+  url: 'https://www.stoughtongymnastics.com/',
+  telephone: site.phoneSchema,
+  email: site.email,
+  address: { '@type': 'PostalAddress', streetAddress: site.address.street, addressLocality: site.address.city, addressRegion: site.address.state, postalCode: site.address.zip, addressCountry: 'US' },
+  geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
+  image: 'https://www.stoughtongymnastics.com/og/default.jpg',
+  sameAs: [site.facebook, site.instagram],
+  // openingHoursSpecification intentionally omitted until the gym confirms hours (build script 11 / 15 Q1).
+};
+---
+<script type="application/ld+json" is:inline set:html={JSON.stringify(data)} />

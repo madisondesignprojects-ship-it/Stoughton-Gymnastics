@@ -1,0 +1,10 @@
+[
+  { "id": "gold", "name": "Gold Party", "price": "$165", "ribbon": "sunny",
+    "lines": ["Includes 15 party participants. Additional guests welcome at $6 per guest.", "1.5 hour party: 60 minutes of gym time & 30 minutes in the party room."],
+    "addon": "Add 18 cupcakes & juice boxes, paper plates, napkins and cutlery for $50.",
+    "timebar": [["Gym", 60], ["Party room", 30]] },
+  { "id": "platinum", "name": "Platinum Party", "price": "$215", "ribbon": "purple",
+    "lines": ["Includes 15 party participants. Additional guests welcome at $8 per guest.", "2 hour party: 80 minutes in the gym & 40 minutes in the party room"],
+    "addon": "Add 18 cupcakes & juice boxes, paper plates, napkins and cutlery for $50.",
+    "timebar": [["Gym", 80], ["Party room", 40]] }
+]

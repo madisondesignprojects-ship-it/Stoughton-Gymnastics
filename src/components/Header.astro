@@ -1,0 +1,78 @@
+---
+import Icon from './Icon.astro';
+import Wordmark from './Wordmark.astro';
+import { nav, site, tel, isCurrent, isSection } from '../lib/site';
+const path = Astro.url.pathname;
+const main = nav.filter((n) => !n.primary && !n.utility);
+const utility = nav.filter((n) => n.utility);
+const enroll = nav.find((n) => n.primary)!;
+---
+<header class="site-header sticky top-0 z-40" data-header>
+  <!-- Utility row (desktop) -->
+  <div class="hidden bg-purple-50 lg:block">
+    <div class="container-x flex h-8 items-center justify-end gap-6 text-[13px] font-semibold text-slate">
+      <a href={tel} class="inline-flex items-center gap-1.5 hover:text-gym-purple"><Icon name="phone" size={14} />{site.phoneBranded}</a>
+      {utility.map((u) => (
+        <a href={u.href} target="_blank" rel="noopener" class="inline-flex items-center gap-1 hover:text-gym-purple">{u.label}<Icon name="external-link" size={12} /><span class="sr-only">(opens in new tab)</span></a>
+      ))}
+    </div>
+  </div>
+  <div class="header-bar border-b border-purple-100/70 bg-white/95 backdrop-blur transition-all duration-300">
+    <div class="container-x flex h-16 items-center justify-between gap-4 transition-all duration-300 lg:h-[76px]" data-header-inner>
+      <a href="/" class="shrink-0 rounded-lg" aria-label="Stoughton Gymnastics home"><Wordmark /></a>
+
+      <nav aria-label="Main" class="hidden lg:block">
+        <ul class="flex items-center gap-1 xl:gap-2">
+          {main.map((item) => {
+            const current = isCurrent(item.href, path);
+            const section = isSection(item, path);
+            const id = `dd-${item.label.toLowerCase().replace(/[^a-z]+/g, '-')}`;
+            return (
+              <li class="relative" data-dropdown={item.children ? '' : undefined}>
+                <div class="flex items-center">
+                  <a href={item.href} aria-current={current ? 'page' : undefined}
+                     class={`relative rounded-full px-3 py-2 text-[15px] font-extrabold transition-colors hover:bg-purple-50 hover:text-gym-purple ${section ? 'text-gym-purple' : 'text-purple-700/85'}`}>
+                    {item.label}
+                    {section && <span class="absolute inset-x-3 -bottom-0.5 h-[3px] rounded-full bg-teal" aria-hidden="true"></span>}
+                  </a>
+                  {item.children && (
+                    <button type="button" class="-ml-1 inline-flex h-11 w-8 items-center justify-center rounded-full text-purple-700/70 hover:bg-purple-50 hover:text-gym-purple" aria-expanded="false" aria-controls={id} data-dd-btn>
+                      <Icon name="chevron-down" size={16} class="transition-transform duration-200" />
+                      <span class="sr-only">{item.label} submenu</span>
+                    </button>
+                  )}
+                </div>
+                {item.children && (
+                  <div id={id} hidden data-dd-panel class="absolute left-0 top-full z-50 mt-2 min-w-60 overflow-hidden rounded-3xl border-t-2 border-sunny bg-white p-2" style="box-shadow: var(--shadow-lift)">
+                    <ul>
+                      {item.children.map((c) => (
+                        <li><a href={c.href} aria-current={isCurrent(c.href, path) ? 'page' : undefined} class={`flex min-h-11 items-center rounded-2xl px-4 py-2 font-bold hover:bg-purple-50 ${isCurrent(c.href, path) ? 'bg-ice text-gym-purple' : 'text-purple-700'}`}>{c.label}</a></li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <a href={enroll.href} target="_blank" rel="noopener" class="btn btn-primary btn-sm hidden lg:inline-flex">
+          Enroll <Icon name="external-link" size={16} /><span class="sr-only">(opens in new tab)</span>
+        </a>
+        <a href={tel} class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-ice text-plum lg:hidden" aria-label={`Call ${site.phoneBranded}`}>
+          <Icon name="phone" size={22} />
+        </a>
+        <button type="button" class="hamburger inline-flex h-12 w-12 items-center justify-center rounded-full bg-gym-purple text-white lg:hidden" aria-controls="mobile-menu" aria-expanded="false" data-menu-open>
+          <span class="sr-only">Open menu</span>
+          <span class="relative block h-4 w-5" aria-hidden="true">
+            <span class="absolute left-0 top-0 h-0.5 w-5 rounded bg-current"></span>
+            <span class="absolute left-0 top-[7px] h-0.5 w-5 rounded bg-current"></span>
+            <span class="absolute left-0 top-[14px] h-0.5 w-5 rounded bg-current"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

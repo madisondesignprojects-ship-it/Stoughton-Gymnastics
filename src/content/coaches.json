@@ -1,0 +1,12 @@
+[
+  { "name": "Jessica K.", "role": "Coach & Owner", "image": "archived-coach-info/coach-jessica-k-owner.jpg",
+    "bullets": ["30 years coaching; 24 years in Stoughton", "Former Division 1 All - Around Competitive Gymnast", "10 years Coaching D1 Gymnastics", "On Site each night, coaching a variety of classes", "Team Xcel Coach"] },
+  { "name": "Shannon S.", "role": "Office Manager & Coach", "image": "archived-coach-info/coach-shannon-s-office-manager.jpg",
+    "bullets": ["Stoughton Gymnastics' \"Do it all Gal!\"", "Enrollment & Registration Manager", "Rec and Team Coach", "Team Coordinator", "Mom to 5... Including Corley, Xcel Gold Gymnast"] },
+  { "name": "Kaitlyn W.", "role": null, "image": "archived-coach-info/coach-kaitlyn-w.jpg",
+    "bullets": ["Former Competitive All-Around Gymnast", "Xcel Team Coach", "Joined Stoughton Gymnastics in February 2019 after relocating to town!  We are so excited!!!", "Former Gymnastics Coach in S.Dakota & our uneven bar specialist", "Active volunteer with Juvenile Diabetes programs"] },
+  { "name": "Mariah C", "role": null, "image": "archived-coach-info/coach-mariah-c.jpg",
+    "bullets": ["Former Xcel Competitive Gymnast", "Coaches our Little Flippers students and gymnastics students", "Started gymnastics at age 3", "High School Student at SHS"] },
+  { "name": "Noelle G", "role": null, "image": "archived-coach-info/coach-noelle-g.jpg",
+    "bullets": ["10 years Dance experience", "Coaches Little Flippers, Gymnastics, and also Dance @ Dance Dimensions", "Competitive Dancer", "High School student at SHS"] }
+]

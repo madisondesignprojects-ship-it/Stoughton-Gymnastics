@@ -1,0 +1,42 @@
+---
+import { getImage } from 'astro:assets';
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+import { img } from '../lib/images';
+interface Props { photos: { file: string; alt: string }[]; bento?: boolean; label: string }
+const { photos, bento = false, label } = Astro.props;
+const items = await Promise.all(photos.map(async (p, i) => {
+  const meta = img(p.file);
+  const full = await getImage({ src: meta, width: Math.min(1200, meta.width), format: 'webp' });
+  return { ...p, full: full.src, big: bento && [0, 6, 12].includes(i) };
+}));
+---
+<div>
+  <ul class={`grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4 ${bento ? 'lg:grid-flow-dense' : ''}`} data-gallery aria-label={label}>
+    {items.map((p, i) => (
+      <li class={`reveal ${p.big ? 'lg:col-span-2 lg:row-span-2' : ''}`} style={`--d:${(i % 4) * 60}ms`}>
+        <button type="button" class="group relative block aspect-square w-full overflow-hidden rounded-[20px] bg-purple-50 ring-1 ring-purple-100" data-full={p.full} data-alt={p.alt} aria-label={`Open photo ${i + 1} of ${items.length}: ${p.alt}`}>
+          <Img src={p.file} alt={p.alt} sizes={p.big ? '(min-width:1024px) 50vw, (min-width:768px) 33vw, 50vw' : '(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw'} class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+          <span class="absolute bottom-2 right-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-plum opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true"><Icon name="maximize-2" size={16} /></span>
+        </button>
+      </li>
+    ))}
+  </ul>
+  <dialog class="lightbox fixed inset-0 m-0 h-[100dvh] max-h-none w-screen max-w-none bg-ink/95 p-0 text-white" aria-label="Photo viewer">
+    <div class="flex h-full w-full items-center justify-center p-3 md:p-10">
+      <div class="relative w-full max-w-[1100px]">
+        <figure class="flex flex-col items-center">
+          <img data-lb-img src="" alt="" class="max-h-[74dvh] w-auto touch-pan-y select-none rounded-[20px] object-contain" draggable="false" />
+          <figcaption class="mt-3 flex w-full max-w-3xl items-center justify-between gap-4 px-1 text-sm md:text-base">
+            <span data-lb-cap class="font-semibold"></span><span data-lb-count class="shrink-0 rounded-full bg-white/15 px-3 py-1 font-bold"></span>
+          </figcaption>
+        </figure>
+        <div class="mt-4 flex justify-center gap-4 md:mt-0">
+          <button type="button" data-lb-prev class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white text-plum shadow-lg md:absolute md:left-0 md:top-[37dvh] md:-translate-y-1/2"><Icon name="chevron-left" /><span class="sr-only">Previous photo</span></button>
+          <button type="button" data-lb-next class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white text-plum shadow-lg md:absolute md:right-0 md:top-[37dvh] md:-translate-y-1/2"><Icon name="chevron-right" /><span class="sr-only">Next photo</span></button>
+        </div>
+      </div>
+    </div>
+    <button type="button" data-lb-close class="absolute right-3 top-3 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25"><Icon name="x" /><span class="sr-only">Close photo viewer</span></button>
+  </dialog>
+</div>

@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import LinkCard from '../components/LinkCard.astro';
+import Icon from '../components/Icon.astro';
+import parties from '../content/parties.json';
+import { nextUpcoming } from '../lib/calendar';
+import { site } from '../lib/site';
+const next = nextUpcoming();
+// The live page is blank; this hub uses only existing copy from the five sub-pages.
+// Optional intro copy omitted until the gym supplies it (build script 9.6).
+---
+<BaseLayout title="Events: Birthday Parties, Parent's Night Out & Nerf Battle | Stoughton Gymnastics"
+  description="Birthday parties, Parent's Night Out, Nerf Battle nights, the participation waiver and the class calendar at Stoughton Gymnastics in Stoughton, WI.">
+  <PageHero title="Events" crumbs={[{ label: 'Events' }]} />
+  <section class="section pt-8">
+    <ul class="container-x grid gap-6 md:grid-cols-2 lg:grid-cols-6" data-stagger>
+      <li class="lg:col-span-2"><LinkCard href="/birthday-parties" title="Birthday Parties" icon="party-popper" headingLevel="h2" class="h-full"
+        teaser="Our staff will set up tables, chairs, tablecloths and have an additional table for gifts and cake. After your event, we clean up the mess!"
+        chips={parties.map((p) => `${p.name}: ${p.price}`)} /></li>
+      <li class="lg:col-span-2"><LinkCard href="/parents-night-out" title="Parent's Night Out" icon="moon" headingLevel="h2" class="h-full"
+        teaser="Kids will run, jump, bounce, tumble, and swing while parents have the night off." chips={['5 - 7:30 pm @ $20', '5 - 9:00 pm @ $35']} /></li>
+      <li class="lg:col-span-2"><LinkCard href="/nerf-battle" title="Nerf Battle" icon="target" headingLevel="h2" class="h-full" imageSmall
+        image="nerf-battle/nerf-battle-01-kids-with-nerf-blasters.png" imageAlt="Kids holding Nerf blasters in the gym"
+        teaser="Kids will get some target practice and set up a battlefield using mats and setting up gym equipment." chips={['$15 - $20']} /></li>
+      <li class="lg:col-span-3"><LinkCard href="/participation-waiver" title="Participation Waiver" icon="file-signature" headingLevel="h2" class="h-full"
+        teaser="Please list all children in your family on this single waiver" /></li>
+      <li class="lg:col-span-3"><LinkCard href="/calendar" title="Calendar" icon="calendar" headingLevel="h2" class="h-full"
+        teaser={next ? `${next.month}: ${next.text}` : 'Closures are posted on Facebook'} /></li>
+    </ul>
+    <div class="container-x mt-12 flex flex-col items-center gap-4 text-center">
+      <p class="text-lg font-bold text-gym-purple">Upcoming dates are posted on Facebook</p>
+      <a href={site.facebook} target="_blank" rel="noopener" class="btn btn-primary"><Icon name="facebook" size={20} />Stoughton Gymnastics on Facebook<span class="sr-only">(opens in new tab)</span></a>
+    </div>
+  </section>
+</BaseLayout>

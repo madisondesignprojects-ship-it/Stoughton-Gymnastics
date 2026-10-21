@@ -1,0 +1,30 @@
+---
+import { getImage } from 'astro:assets';
+import ConfettiDots from './ConfettiDots.astro';
+import WaveDivider from './WaveDivider.astro';
+import Icon from './Icon.astro';
+import { img } from '../lib/images';
+import { site } from '../lib/site';
+interface Props { prev?: string }
+const { prev = '#ffffff' } = Astro.props;
+// Original mobile header background (purple-tinted bars photo), kept as a 15% texture.
+const tex = await getImage({ src: img('global/hero-mobile-girls-hanging-on-bars-purple-tint.jpg'), width: 500, format: 'webp' });
+---
+<section class="enroll-band relative" style={`background:${prev}`} aria-labelledby="enroll-band-title">
+  <WaveDivider fill="#623962" class="-mb-px" />
+  <div class="relative overflow-hidden bg-plum text-white">
+    <div class="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-luminosity" style={`background-image:url(${tex.src})`} aria-hidden="true"></div>
+    <ConfettiDots class="absolute left-2 top-4 w-28 md:left-10 md:w-40" variant="b" />
+    <ConfettiDots class="absolute bottom-6 right-2 w-28 md:right-10 md:w-40" variant="a" />
+    <div class="container-x relative py-14 text-center md:py-20">
+      <h2 id="enroll-band-title" class="text-white">Schedule &amp; Enrollment</h2>
+      <p class="mx-auto mt-4 max-w-xl text-lg text-purple-50">To view the CLASS SCHEDULE, click "Schedule and Enrollment" button below.</p>
+      <p class="mx-auto mt-2 max-w-xl inline-flex items-center gap-2 rounded-2xl bg-white/10 px-4 py-1.5 font-bold text-white sm:rounded-full"><Icon name="calendar-plus" size={18} />Join mid-month - we will prorate your monthly fees.</p>
+      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href={site.iclassproClasses} target="_blank" rel="noopener" class="btn btn-on-dark w-full sm:w-auto text-lg">Schedule &amp; Enrollment <Icon name="external-link" size={18} /><span class="sr-only">(opens in new tab)</span></a>
+        <a href={site.iclassproRegister} target="_blank" rel="noopener" class="btn btn-outline-dark w-full sm:w-auto">Create an Account<span class="sr-only">(opens in new tab)</span></a>
+        <a href={site.iclassproPortal} target="_blank" rel="noopener" class="inline-flex min-h-12 items-center px-4 font-bold text-white underline decoration-2 underline-offset-4 hover:decoration-sunny">Member Login<span class="sr-only">(opens in new tab)</span></a>
+      </div>
+    </div>
+  </div>
+</section>

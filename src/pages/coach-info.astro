@@ -1,0 +1,35 @@
+---
+// HIDDEN PAGE (build script 9.15). Built but not linked anywhere, noindex, and excluded from the sitemap
+// until SHOW_COACHES is set to true after the gym approves. Content is from the Oct 2, 2023 Wayback snapshot.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import Icon from '../components/Icon.astro';
+import Placeholder from '../components/Placeholder.astro';
+import coaches from '../content/coaches.json';
+import { SHOW_COACHES } from '../flags.mjs';
+---
+<BaseLayout title="Our Coaches | Stoughton Gymnastics" noindex={!SHOW_COACHES}
+  description="Meet the coaches at Stoughton Gymnastics in Stoughton, WI.">
+  <PageHero title="Coach Info" crumbs={[{ label: 'Coach Info' }]} />
+  <section class="section pt-8">
+    <div class="container-x">
+      {!SHOW_COACHES && <Placeholder note="this page is hidden (unlinked, noindex, not in sitemap). Confirm which coaches are current, updated bios, and permission to post photos/bios (two bios describe high-school students)" />}
+      <Placeholder note="photos were matched to names by their position in the 2023 archived layout; confirm photo/name pairs" />
+      <ul class="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {coaches.map((c, i) => (
+          <li class="card lift reveal flex flex-col p-5">
+            <div class={`polaroid ${i % 2 ? 'tilt-r' : 'tilt-l'} w-full p-1.5 shadow-none ring-1 ring-purple-100`}>
+              <Img src={c.image} alt={`Coach ${c.name}`} sizes="(min-width:1024px) 340px, (min-width:768px) 45vw, 92vw" maxWidth={800} class="aspect-[4/5] w-full object-cover object-top" />
+            </div>
+            <h2 class="mt-5 font-sans text-2xl font-extrabold">{c.name}</h2>
+            {c.role && <p class="font-bold text-plum">{c.role}</p>}
+            <ul class="mt-3 space-y-2">
+              {c.bullets.map((b) => <li class="flex gap-2"><Icon name="star" size={16} class="mt-1.5 shrink-0 text-plum-400" /><span>{b}</span></li>)}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

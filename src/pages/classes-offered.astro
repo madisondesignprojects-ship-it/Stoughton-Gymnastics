@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import Icon from '../components/Icon.astro';
+import Medals from '../components/Medals.astro';
+import Placeholder from '../components/Placeholder.astro';
+import WaveDivider from '../components/WaveDivider.astro';
+import programs from '../content/programs.json';
+import { site } from '../lib/site';
+const jump = [['preschool', 'Pre-School'], ['preschool-independent', 'Pre-School Independent'], ['recreational', 'Recreational'], ['team', 'Team'], ['ninja', 'Ninja Warrior']];
+const circuitIcons = ['arrow-up-from-line', 'route', 'minus', 'flame'];
+---
+<BaseLayout title="Classes Offered: Pre-School, Recreational, Team & Ninja Warrior | Stoughton Gymnastics"
+  description="Pre-School (ages 2-3 & 3-4), Pre-School Independent Gymnastics (ages 4-5), Recreational Gymnastics (ages 4-18), XCEL Team Gymnastics and Ninja Warrior classes in Stoughton, WI.">
+  <PageHero title="Classes Offered" crumbs={[{ label: 'Classes Offered' }]} />
+
+  <nav aria-label="Jump to a class" class="no-scrollbar sticky top-16 z-20 -mt-2 overflow-x-auto border-b border-purple-100 bg-white/95 backdrop-blur lg:top-[108px]">
+    <ul class="container-x flex w-max gap-2 py-3 lg:w-full lg:justify-center">
+      {jump.map(([id, l]) => <li><a href={`#${id}`} class="chip chip-ice min-h-10 whitespace-nowrap px-4 hover:bg-teal hover:text-white">{l}</a></li>)}
+    </ul>
+  </nav>
+
+  <div class="container-x section pt-10">
+    <Placeholder note="class photos below are reused from the Photos/Team galleries (the original page has no images); the gym may supply class-specific photos" />
+    <div class="mt-8 space-y-16 md:space-y-24">
+      {programs.classes.map((c, i) => (
+        <article id={c.id} class={`reveal grid items-center gap-8 md:grid-cols-2 md:gap-12`} aria-labelledby={`${c.id}-h`}>
+          <div class={`relative ${i % 2 ? 'md:order-2' : ''}`}>
+            <div class={`polaroid ${i % 2 ? 'tilt-r' : 'tilt-l'} w-full`}>
+              <Img src={c.image} alt={c.imageAlt} sizes="(min-width:768px) 45vw, 92vw" class="aspect-[4/3] w-full object-cover" />
+            </div>
+          </div>
+          <div>
+            <p class="eyebrow">{c.heading}</p>
+            <h2 id={`${c.id}-h`} class="mt-1">{c.title}</h2>
+            <div class="mt-4 flex flex-wrap gap-2">
+              {c.chips.map((ch) => <span class="chip chip-ice">{ch}</span>)}
+              {c.price && <span class="chip chip-sunny">{c.price}</span>}
+              {c.priceNote && <span class="chip chip-plum">{c.priceNote}</span>}
+            </div>
+            <p class="mt-4 text-lg">{c.body}</p>
+            {c.facts && (
+              <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+                {c.facts.map(([ic, t]) => <li class="flex items-center gap-3 rounded-2xl bg-purple-50 p-3 text-[0.95rem] font-bold text-gym-purple"><span class="icon-circle h-9 w-9 bg-white"><Icon name={ic} size={18} /></span>{t}</li>)}
+              </ul>
+            )}
+            {c.medals && <Medals class="mt-5" />}
+            {c.circuits && (
+              <ul class="mt-5 flex flex-wrap gap-2" aria-label="Circuits">
+                {c.circuits.map((t, n) => <li class="chip chip-plum px-4 py-2"><Icon name={circuitIcons[n]} size={16} />{t}</li>)}
+              </ul>
+            )}
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a href={site.iclassproClasses} target="_blank" rel="noopener" class="btn btn-primary">Enroll<span class="sr-only"> in {c.title} (opens in new tab)</span></a>
+              {c.link && <a href={c.link.href} class="btn btn-secondary">{c.link.label} <Icon name="arrow-right" size={18} /></a>}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <section class="relative bg-purple-50" aria-labelledby="pricing-title">
+    <WaveDivider fill="#F3F0F8" flip class="bg-white" />
+    <div class="container-x section pt-10">
+      <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <h2 id="pricing-title">Programs &amp; Pricing</h2>
+        <p class="chip chip-sunny px-4 py-2 text-base">(ADD a second class day for 50% off)</p>
+      </div>
+      <Placeholder note="age ranges in this summary come from the Home page and differ from the class headings above; confirm which are current" />
+      <!-- Desktop table -->
+      <div class="mt-6 hidden overflow-hidden rounded-[24px] bg-white ring-1 ring-purple-100 md:block" style="box-shadow:var(--shadow-soft)">
+        <table class="w-full text-left">
+          <thead class="bg-gym-purple text-white"><tr><th scope="col" class="px-5 py-4">Program</th><th scope="col" class="px-5 py-4">Ages</th><th scope="col" class="px-5 py-4">Price</th><th scope="col" class="px-5 py-4">Notes</th></tr></thead>
+          <tbody>
+            {programs.summary.map((r, i) => (
+              <tr class={i % 2 ? 'bg-purple-50/60' : ''}>
+                <th scope="row" class="px-5 py-4 font-extrabold text-gym-purple">{r.program}</th>
+                <td class="px-5 py-4">{r.ages || '—'}</td>
+                <td class="px-5 py-4 font-bold">{r.price || '—'}</td>
+                <td class="px-5 py-4 text-[0.95rem]">{r.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <!-- Mobile cards -->
+      <ul class="mt-6 space-y-3 md:hidden">
+        {programs.summary.map((r) => (
+          <li class="card p-5">
+            <p class="text-lg font-extrabold text-gym-purple">{r.program}</p>
+            <dl class="mt-2 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-[0.95rem]">
+              {r.ages && <><dt class="font-bold text-slate">Ages</dt><dd>{r.ages}</dd></>}
+              {r.price && <><dt class="font-bold text-slate">Price</dt><dd class="font-bold">{r.price}</dd></>}
+              {r.notes && <><dt class="font-bold text-slate">Notes</dt><dd>{r.notes}</dd></>}
+            </dl>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <WaveDivider fill="#ffffff" />
+  </section>
+</BaseLayout>

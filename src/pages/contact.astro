@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactForm from '../components/ContactForm.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import Icon from '../components/Icon.astro';
+import Placeholder from '../components/Placeholder.astro';
+import { site, tel } from '../lib/site';
+---
+<BaseLayout title="Contact Us | Stoughton Gymnastics, 201 W. Main St, Stoughton, WI"
+  description="Call (608) 88-VAULT, email information@stoughtongymnastics.com or send us a message. Stoughton Gymnastics, 201 W. Main Street, Stoughton, WI 53589.">
+  <PageHero title="Contact Us" crumbs={[{ label: 'Contact' }]} />
+  <section class="section pt-8">
+    <div class="container-x grid gap-10 lg:grid-cols-12">
+      <!-- Info first on mobile (tap-to-call), right column on desktop -->
+      <aside class="reveal lg:order-2 lg:col-span-5" aria-label="Contact information">
+        <div class="rounded-[24px] bg-purple-50 p-6 md:p-8">
+          <div class="prose-sg">
+            <p class="font-extrabold text-gym-purple">Our typical business hours are 3 pm to 8 pm.</p>
+            <p>However, it is not always possible to speak with you during our hours of operation, as we are often busy with the kids and teaching classes.</p>
+            <p>Feel free to also call (608) 88 VAULT and leave a detailed message with your phone number.</p>
+            <p>We look forward to speaking with you.</p>
+          </div>
+          <Placeholder note="confirm hours; Google lists Mon-Thu 3:30-9 PM, Fri-Sun closed" />
+          <ul class="mt-5 space-y-3">
+            <li><a href={tel} class="lift flex min-h-14 items-center gap-4 rounded-2xl bg-white p-3 font-extrabold text-gym-purple ring-1 ring-purple-100"><span class="icon-circle"><Icon name="phone" /></span>(608) 88 VAULT</a></li>
+            <li><a href={`mailto:${site.email}`} class="lift flex min-h-14 items-center gap-4 rounded-2xl bg-white p-3 font-bold text-teal-700 ring-1 ring-purple-100"><span class="icon-circle"><Icon name="mail" /></span><span>Information@<wbr />stoughtongymnastics.com</span></a></li>
+            <li><a href={site.directions} target="_blank" rel="noopener" class="lift flex min-h-14 items-center gap-4 rounded-2xl bg-white p-3 font-bold text-gym-purple ring-1 ring-purple-100"><span class="icon-circle"><Icon name="map-pin" /></span>201 W. Main Street, Stoughton, WI 53589<span class="sr-only">(directions, opens in new tab)</span></a></li>
+          </ul>
+          <div class="mt-5 flex gap-3">
+            <a href={site.facebook} target="_blank" rel="noopener" aria-label="Stoughton Gymnastics on Facebook (opens in new tab)" class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gym-purple text-white hover:bg-plum"><Icon name="facebook" /></a>
+            <a href={site.instagram} target="_blank" rel="noopener" aria-label="Stoughton Gymnastics on Instagram (opens in new tab)" class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gym-purple text-white hover:bg-plum"><Icon name="instagram" /></a>
+          </div>
+        </div>
+      </aside>
+      <div class="reveal lg:order-1 lg:col-span-7">
+        <h2>Send us a message</h2>
+        <div class="card mt-6 p-6 md:p-8"><ContactForm /></div>
+      </div>
+      <div class="reveal lg:order-3 lg:col-span-12"><MapEmbed /></div>
+    </div>
+  </section>
+</BaseLayout>

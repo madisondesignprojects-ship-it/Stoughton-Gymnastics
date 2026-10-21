@@ -1,0 +1,50 @@
+---
+import Icon from './Icon.astro';
+import Wordmark from './Wordmark.astro';
+import Placeholder from './Placeholder.astro';
+import WaveDivider from './WaveDivider.astro';
+import { nav, site, tel } from '../lib/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer relative bg-ink text-purple-100">
+  <div class="bg-plum"><WaveDivider fill="#413659" class="-mb-px" /></div>
+  <div class="h-3 bg-gym-purple"></div>
+  <WaveDivider fill="#110A17" class="-mt-px bg-gym-purple" />
+  <div class="container-x grid gap-10 pb-10 pt-8 text-center md:grid-cols-2 md:text-left lg:grid-cols-4">
+    <div>
+      <Wordmark dark />
+      <p class="mt-3 font-semibold">Gymnastics, Pre-School &amp; Ninja Warrior</p>
+    </div>
+    <div>
+      <h2 class="font-sans text-base font-extrabold uppercase tracking-[.08em] text-white">Visit</h2>
+      <address class="mt-3 not-italic leading-relaxed">Stoughton Gymnastics<br />201 W. Main Street<br />Stoughton, WI&nbsp; 53589</address>
+      <a href={site.directions} target="_blank" rel="noopener" class="mt-2 inline-flex min-h-11 items-center gap-1.5 font-bold text-white underline decoration-sunny decoration-2 underline-offset-4">Get directions <Icon name="external-link" size={14} /><span class="sr-only">(opens in new tab)</span></a>
+    </div>
+    <div>
+      <h2 class="font-sans text-base font-extrabold uppercase tracking-[.08em] text-white">Contact</h2>
+      <ul class="mt-3 space-y-1">
+        <li><a href={tel} class="inline-flex min-h-11 items-center gap-2 font-bold text-white hover:underline"><Icon name="phone" size={18} />Call:&nbsp; (608) 88 VAULT</a></li>
+        <li><a href={`mailto:${site.emailDisplay}`} class="inline-flex min-h-11 items-center gap-2 hover:text-white hover:underline"><Icon name="mail" size={18} class="shrink-0" /><span>Information@<wbr />stoughtongymnastics.com</span></a></li>
+        <li class="flex items-start justify-center gap-2 pt-2 md:justify-start"><Icon name="clock" size={18} class="mt-1 shrink-0" /><span>{site.hoursText}</span></li>
+      </ul>
+      {!site.hoursConfirmed && <Placeholder inline note="confirm hours (Google lists Mon-Thu 3:30-9 PM)" class="mt-2" />}
+    </div>
+    <div>
+      <h2 class="font-sans text-base font-extrabold uppercase tracking-[.08em] text-white">Quick links</h2>
+      <ul class="mt-3 grid grid-cols-2 gap-x-4 text-[15px] md:grid-cols-1 lg:grid-cols-2">
+        {nav.map((n) => (
+          <li><a href={n.href} target={n.external ? '_blank' : undefined} rel={n.external ? 'noopener' : undefined} class="inline-flex min-h-11 items-center hover:text-white hover:underline">{n.label}{n.external && <span class="sr-only">(opens in new tab)</span>}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="container-x flex flex-col items-center justify-between gap-4 py-6 md:flex-row">
+      <div class="flex gap-3">
+        <a href={site.facebook} target="_blank" rel="noopener" aria-label="Stoughton Gymnastics on Facebook (opens in new tab)" class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition hover:scale-105 hover:bg-plum"><Icon name="facebook" /></a>
+        <a href={site.instagram} target="_blank" rel="noopener" aria-label="Stoughton Gymnastics on Instagram (opens in new tab)" class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition hover:scale-105 hover:bg-plum"><Icon name="instagram" /></a>
+      </div>
+      <p class="text-sm">© {year} Stoughton Gymnastics, LLC</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Img from '../components/Img.astro';
+import Icon from '../components/Icon.astro';
+import ConfettiDots from '../components/ConfettiDots.astro';
+import WaveDivider from '../components/WaveDivider.astro';
+import Medals from '../components/Medals.astro';
+import LinkCard from '../components/LinkCard.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import Placeholder from '../components/Placeholder.astro';
+import programs from '../content/programs.json';
+import { site, tel } from '../lib/site';
+const main = programs.home.filter((p) => !p.team);
+const teams = programs.home.filter((p) => p.team);
+---
+<BaseLayout
+  title="Stoughton Gymnastics | Gymnastics, Pre-School & Ninja Warrior in Stoughton, WI"
+  description="Gymnastics for kids ages 3 to 18 in beautiful Downtown Stoughton at 201 W. Main Street. Pre-School, Recreational Gymnastics, XCEL Team and Ninja Warrior. Enroll at any point in the month.">
+
+  <!-- 1. Hero -->
+  <section class="relative overflow-hidden bg-white">
+    <div class="pointer-events-none absolute -right-32 -top-24 h-[28rem] w-[28rem] rounded-full bg-purple-50" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -bottom-40 -left-28 h-[24rem] w-[24rem] rounded-full bg-plum-50" aria-hidden="true"></div>
+    <div class="container-x relative grid items-center gap-10 pb-10 pt-8 md:pt-12 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:pb-16 lg:pt-16">
+      <div>
+        <p class="chip chip-ice"><Icon name="map-pin" size={16} class="text-teal-700" />201 W. Main St</p>
+        <h1 class="mt-4">Stoughton Gymnastics</h1>
+        <p class="mt-2 text-xl font-extrabold text-plum md:text-2xl">Gymnastics, Pre-School &amp; Ninja Warrior</p>
+        <p class="lead mt-5">We strive to teach children how to strengthen their bodies and build skills that are used in nearly every sport.  We make learning and fitness fun.</p>
+        <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+          <a href={site.iclassproClasses} target="_blank" rel="noopener" class="btn btn-primary text-lg">Schedule &amp; Enrollment <Icon name="external-link" size={18} /><span class="sr-only">(opens in new tab)</span></a>
+          <a href={tel} class="btn btn-secondary text-lg"><Icon name="phone" size={20} />Call 608.88 VAULT</a>
+        </div>
+        <p class="mt-4 inline-flex items-center gap-2 text-[0.95rem] font-bold text-teal-700"><Icon name="sparkles" size={18} class="text-plum-400" />Enroll at any point in the month and your fees are prorated!</p>
+      </div>
+      <div class="relative mx-auto mt-6 w-full max-w-[500px] lg:mt-0 lg:max-w-[560px]">
+        <ConfettiDots class="absolute -left-6 -top-10 z-10 w-36" />
+        <div class="polaroid tilt-r w-full">
+          <Img src="global/hero-desktop-girls-hanging-on-bars.jpg" alt="Young gymnasts hanging upside down and swinging on the bars at Stoughton Gymnastics" eager sizes="(min-width:1024px) 500px, 92vw" class="w-full" />
+        </div>
+        <ConfettiDots class="absolute -bottom-10 -right-4 w-32" variant="c" />
+        <Placeholder inline note="request a high-resolution original or new hero photos (current file is 500×333)" class="mt-5" />
+      </div>
+    </div>
+    <WaveDivider fill="#ffffff" class="relative" />
+  </section>
+
+  <!-- 2. About Us -->
+  <section class="section pt-6" aria-labelledby="about-title">
+    <div class="container-x grid items-center gap-12 lg:grid-cols-12">
+      <div class="reveal lg:col-span-7">
+        <p class="eyebrow">Welcome</p>
+        <h2 id="about-title" class="mt-1">About Us</h2>
+        <div class="prose-sg mt-5 text-lg">
+          <p>Stoughton Gymnastics provides full gymnastics programming that includes instruction on the Bars, Beam, Floor and Vault. Participants will rotate through the gymnastic events and utilize the tumble track (long trampoline) to work on skill development, coordination and have FUN.</p>
+          <p>Stoughton Gymnastics is located in beautiful Downtown Stoughton at 201 W. Main Street.</p>
+        </div>
+        <ul class="mt-7 flex flex-wrap gap-2.5" aria-label="Events we teach">
+          {[['Bars', 'minus'], ['Beam', 'move-horizontal'], ['Floor', 'square'], ['Vault', 'chevrons-up'], ['Tumble Track', 'activity']].map(([l, i], n) => (
+            <li class={`chip px-4 py-2 text-base ${['chip-ice', 'chip-plum', 'chip-sunny', 'chip-ice', 'chip-plum'][n]}`}><Icon name={i} size={18} />{l}</li>
+          ))}
+        </ul>
+      </div>
+      <div class="relative grid grid-cols-2 gap-4 lg:col-span-5 lg:block lg:h-[440px]">
+        <div class="polaroid tilt-l reveal lg:absolute lg:left-0 lg:top-0 lg:w-[62%]">
+          <Img src="photos/photos-03-toddler-jumping-on-tumble-track.jpg" alt="Toddler jumping high on the tumble track" sizes="(min-width:1024px) 300px, 45vw" maxWidth={800} class="aspect-square w-full object-cover" />
+        </div>
+        <div class="polaroid tilt-r reveal lg:absolute lg:bottom-0 lg:right-0 lg:w-[62%]" style="--d:120ms">
+          <Img src="photos/photos-01-split-leap-on-tumble-track.jpg" alt="Gymnast doing a split leap above the tumble track" sizes="(min-width:1024px) 300px, 45vw" maxWidth={800} class="aspect-square w-full object-cover" />
+        </div>
+        <ConfettiDots class="absolute -right-2 top-1/3 hidden w-28 lg:block" variant="b" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Programs & Pricing -->
+  <section class="relative bg-purple-50" aria-labelledby="programs-title">
+    <WaveDivider fill="#F3F0F8" flip class="absolute -top-px left-0 bg-white" />
+    <div class="container-x section">
+      <div class="reveal flex flex-col items-start gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="eyebrow">What we offer</p>
+          <h2 id="programs-title" class="mt-1">Programs &amp; Pricing</h2>
+        </div>
+        <p class="chip chip-sunny px-4 py-2 text-base ring-2 ring-sunny/60"><Icon name="star" size={18} class="text-plum" />Add a second class day for 50% off</p>
+      </div>
+      <!-- Age ranges here differ from Classes Offered (build script 15 Q2); shown as-is. -->
+      <Placeholder note="age ranges on this list differ from the Classes Offered page (e.g. Pre-School 'ages 2-4's' vs 'Ages 2-3 & 3-4'; Recreational 'ages 5 and older' vs 'Ages 4-18'). Which is current?" />
+      <ul class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3" data-stagger>
+        {main.map((p) => (
+          <li class="card lift reveal flex flex-col overflow-hidden">
+            <a href={p.href} class="group block aspect-[16/10] overflow-hidden" tabindex="-1" aria-hidden="true">
+              <Img src={p.image!} alt="" sizes="(min-width:1024px) 380px, (min-width:768px) 45vw, 92vw" maxWidth={800} class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+            </a>
+            <div class="flex flex-1 flex-col gap-3 p-6">
+              <div class="flex flex-wrap gap-2">
+                {p.ages && <span class="chip chip-ice">{p.ages}</span>}
+                {p.price && <span class="chip chip-sunny">{p.price}</span>}
+              </div>
+              <h3>{p.title}</h3>
+              <p>{p.body}</p>
+              {p.medals && <Medals />}
+              <div class="mt-auto flex flex-wrap items-center gap-4 pt-2">
+                <a href={site.iclassproClasses} target="_blank" rel="noopener" class="btn btn-primary btn-sm">Enroll<span class="sr-only"> in {p.title} (opens in new tab)</span></a>
+                <a href={p.href} class="link inline-flex items-center gap-1">Details<span class="sr-only"> about {p.title}</span> <Icon name="arrow-right" size={16} /></a>
+              </div>
+            </div>
+          </li>
+        ))}
+        <li class="flex flex-col gap-6">
+          {teams.map((t) => (
+            <a href={t.href} class="card lift reveal group flex flex-1 items-center gap-4 border-transparent bg-plum-50 p-6 no-underline">
+              <span class="icon-circle bg-white"><Icon name="trophy" /></span>
+              <h3 class="flex-1 text-xl">{t.title}</h3>
+              <Icon name="arrow-right" class="text-teal-700 transition-transform group-hover:translate-x-1" />
+            </a>
+          ))}
+        </li>
+      </ul>
+      <div class="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+        <a href={site.iclassproClasses} target="_blank" rel="noopener" class="btn btn-primary text-lg">Enroll <Icon name="external-link" size={18} /><span class="sr-only">(opens in new tab)</span></a>
+        <a href="/tuition-and-policies" class="link inline-flex min-h-11 items-center gap-1">Tuition &amp; Policies <Icon name="arrow-right" size={16} /></a>
+      </div>
+    </div>
+    <WaveDivider fill="#ffffff" />
+  </section>
+
+  <!-- 4. More fun at the gym -->
+  <section class="section pt-10" aria-labelledby="fun-title">
+    <div class="container-x">
+      <div class="reveal relative">
+        <p class="eyebrow">Events</p>
+        <h2 id="fun-title" class="mt-1">More fun at the gym</h2>
+        <ConfettiDots class="absolute -top-6 right-0 w-28 md:w-36" variant="c" />
+      </div>
+      <ul class="no-scrollbar -mx-5 mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-6 pt-2 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0">
+        <li class="w-[82%] shrink-0 snap-start md:w-auto"><LinkCard href="/birthday-parties" title="Birthday Parties" icon="party-popper" teaser="After your event, we clean up the mess!" image="photos/photos-07-three-gymnasts-medals-2019-balloons.jpg" imageAlt="Three gymnasts with medals in front of 2019 balloons" tilt="l" class="h-full" /></li>
+        <li class="w-[82%] shrink-0 snap-start md:w-auto"><LinkCard href="/parents-night-out" title="Parent's Night Out" icon="moon" teaser="Kids will run, jump, bounce, tumble, and swing while parents have the night off." image="photos/photos-12-kids-class-on-floor.jpg" imageAlt="Kids gymnastics class practicing on the floor" class="h-full" /></li>
+        <li class="w-[82%] shrink-0 snap-start md:w-auto"><LinkCard href="/nerf-battle" title="Nerf Battle" icon="target" teaser="Bring your own Nerf gun" image="nerf-battle/nerf-battle-01-kids-with-nerf-blasters.png" imageAlt="Kids holding Nerf blasters in the gym" imageSmall tilt="r" class="h-full" /></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. Visit us -->
+  <section class="section bg-white pt-4" aria-labelledby="visit-title">
+    <div class="container-x grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+      <div class="reveal">
+        <p class="eyebrow">Come see us</p>
+        <h2 id="visit-title" class="mt-1">Visit us</h2>
+        <address class="mt-5 text-lg not-italic leading-relaxed">Stoughton Gymnastics<br />201 W. Main Street<br />Stoughton, WI&nbsp; 53589</address>
+        <ul class="mt-5 space-y-2">
+          <li><a href={tel} class="inline-flex min-h-11 items-center gap-3 font-extrabold text-gym-purple hover:underline"><span class="icon-circle"><Icon name="phone" /></span>Call:&nbsp; (608) 88 VAULT</a></li>
+          <li><a href={`mailto:${site.email}`} class="inline-flex min-h-11 items-center gap-3 font-bold text-teal-700 hover:underline"><span class="icon-circle"><Icon name="mail" /></span><span>Information@<wbr />stoughtongymnastics.com</span></a></li>
+          <li class="flex items-center gap-3"><span class="icon-circle"><Icon name="clock" /></span><span>{site.hoursText}</span></li>
+        </ul>
+        <Placeholder note="confirm hours: the site says 3 pm to 8 pm; Google lists Mon-Thu 3:30-9 PM, Fri-Sun closed" />
+        <a href={site.directions} target="_blank" rel="noopener" class="btn btn-secondary mt-2"><Icon name="navigation" size={18} />Get directions<span class="sr-only">(opens in new tab)</span></a>
+      </div>
+      <div class="reveal"><MapEmbed /></div>
+    </div>
+  </section>
+</BaseLayout>

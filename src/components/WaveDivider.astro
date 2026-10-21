@@ -1,0 +1,10 @@
+---
+// One gentle curve. `fill` is the colour of the NEXT section.
+interface Props { fill?: string; flip?: boolean; class?: string }
+const { fill = '#ffffff', flip = false, class: cls = '' } = Astro.props;
+---
+<div class={`wave pointer-events-none block w-full leading-[0] ${cls}`} aria-hidden="true">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none" class={`block h-[34px] w-full md:h-[56px] ${flip ? 'rotate-180' : ''}`}>
+    <path d="M0 38 C 240 78, 480 78, 720 46 C 960 14, 1200 6, 1440 34 L1440 70 L0 70 Z" fill={fill} />
+  </svg>
+</div>

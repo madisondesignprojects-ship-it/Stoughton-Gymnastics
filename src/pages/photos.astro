@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Gallery from '../components/Gallery.astro';
+import Icon from '../components/Icon.astro';
+import photos from '../content/gallery-photos.json';
+import { site } from '../lib/site';
+const words = ['Jump,', 'Climb,', 'Swing,', 'Flip!'];
+---
+<BaseLayout title="Photos | Stoughton Gymnastics" ogImage="/og/photos.jpg"
+  description="Jump, Climb, Swing, Flip! Photos from classes, pre-school, Ninja Warrior and team meets at Stoughton Gymnastics in Stoughton, WI.">
+  <PageHero title="Photos" crumbs={[{ label: 'Photos' }]}>
+    <p class="mt-3 font-display text-2xl font-bold text-sunny md:text-3xl" aria-label="Jump, Climb, Swing, Flip!">
+      {words.map((w, i) => <span class="pop-word mr-2" style={`--i:${i}`} aria-hidden="true">{w}</span>)}
+    </p>
+  </PageHero>
+  <section class="section pt-8">
+    <div class="container-x">
+      <Gallery photos={photos} bento label="Gym photos" />
+      <div class="mt-14 flex flex-col items-center gap-4 text-center">
+        <p class="text-xl font-extrabold text-gym-purple">Follow along for more photos</p>
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <a href={site.instagram} target="_blank" rel="noopener" class="btn btn-primary"><Icon name="instagram" size={20} />Instagram<span class="sr-only">(opens in new tab)</span></a>
+          <a href={site.facebook} target="_blank" rel="noopener" class="btn btn-secondary"><Icon name="facebook" size={20} />Facebook<span class="sr-only">(opens in new tab)</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

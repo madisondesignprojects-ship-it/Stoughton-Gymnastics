@@ -1,0 +1,30 @@
+---
+import Placeholder from './Placeholder.astro';
+const success = "Thanks! We'll get back to you soon.";
+---
+<form name="contact" method="POST" action="/contact?sent=1" data-netlify="true" netlify-honeypot="bot-field" data-contact-form data-success={success} class="space-y-5">
+  <input type="hidden" name="form-name" value="contact" />
+  <p class="hidden"><label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+  <div>
+    <label for="cf-name" class="mb-1.5 block font-extrabold text-gym-purple">Name* <span class="text-sm font-semibold text-slate">(required)</span></label>
+    <input id="cf-name" name="name" type="text" required autocomplete="name" data-label="name" aria-describedby="cf-name-error"
+      class="block min-h-12 w-full rounded-[14px] border-2 border-purple-100 bg-white px-4 py-3 text-purple-700 transition focus:border-teal focus:outline-none aria-[invalid=true]:border-mat-red" />
+    <p id="cf-name-error" class="mt-1 text-sm font-bold text-[#B3121A]" hidden></p>
+  </div>
+  <div>
+    <label for="cf-email" class="mb-1.5 block font-extrabold text-gym-purple">Email Address</label>
+    <input id="cf-email" name="email" type="email" autocomplete="email" data-label="email address" aria-describedby="cf-email-error"
+      class="block min-h-12 w-full rounded-[14px] border-2 border-purple-100 bg-white px-4 py-3 text-purple-700 transition focus:border-teal focus:outline-none aria-[invalid=true]:border-mat-red" />
+    <p id="cf-email-error" class="mt-1 text-sm font-bold text-[#B3121A]" hidden></p>
+    <Placeholder inline note="should email be required so the gym can reply? (optional on the original form)" class="mt-2" />
+  </div>
+  <div>
+    <label for="cf-message" class="mb-1.5 block font-extrabold text-gym-purple">Message* <span class="text-sm font-semibold text-slate">(required)</span></label>
+    <textarea id="cf-message" name="message" rows="6" required data-label="message" aria-describedby="cf-message-error"
+      class="block w-full rounded-[14px] border-2 border-purple-100 bg-white px-4 py-3 text-purple-700 transition focus:border-teal focus:outline-none aria-[invalid=true]:border-mat-red"></textarea>
+    <p id="cf-message-error" class="mt-1 text-sm font-bold text-[#B3121A]" hidden></p>
+  </div>
+  <button type="submit" class="btn btn-primary w-full sm:w-auto sm:px-10">Submit</button>
+  <p class="min-h-6 font-bold text-teal-700" aria-live="polite" data-form-status></p>
+  <Placeholder note={`form recipient inbox (proposed: information@stoughtongymnastics.com via Netlify Forms; NOTE: on the Vercel preview the form can't deliver messages yet and shows the call/email fallback) and thank-you wording ("${success}")`} />
+</form>

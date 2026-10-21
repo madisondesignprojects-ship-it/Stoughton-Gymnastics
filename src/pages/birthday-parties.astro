@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import PriceCard from '../components/PriceCard.astro';
+import InfoCard from '../components/InfoCard.astro';
+import Img from '../components/Img.astro';
+import Icon from '../components/Icon.astro';
+import ConfettiDots from '../components/ConfettiDots.astro';
+import Placeholder from '../components/Placeholder.astro';
+import WaveDivider from '../components/WaveDivider.astro';
+import parties from '../content/parties.json';
+import { tel, mailto } from '../lib/site';
+---
+<BaseLayout title="Birthday Parties | Stoughton Gymnastics" ogImage="/og/photos.jpg"
+  description="Gymnastics birthday parties in Stoughton, WI: Gold Party $165 or Platinum Party $215 with 15 participants included. We set up and clean up. All parties supervised by background-checked, Safe Sport trained adult staff.">
+  <PageHero title="Birthday Parties" crumbs={[{ label: 'Events', href: '/events' }, { label: 'Birthday Parties' }]} />
+
+  <section class="section pt-8">
+    <div class="container-x grid items-center gap-10 lg:grid-cols-[1.3fr_1fr]">
+      <div class="grid gap-5" data-stagger>
+        <InfoCard icon="party-popper" tone="plum">Our staff will set up tables, chairs, tablecloths and have an additional table for gifts and cake. After your event, we clean up the mess!</InfoCard>
+        <InfoCard icon="shield-check" tone="ice">We value safety. All parties are supervised by adult staff members who are background checked and have completed Safe Sport training.</InfoCard>
+      </div>
+      <div class="relative mx-auto w-full max-w-[400px]">
+        <ConfettiDots class="absolute -right-4 -top-8 z-10 w-36" />
+        <div class="polaroid tilt-l w-full"><Img src="photos/photos-07-three-gymnasts-medals-2019-balloons.jpg" alt="Three gymnasts with medals in front of 2019 balloons" sizes="(min-width:1024px) 400px, 92vw" maxWidth={800} class="aspect-square w-full object-cover" /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative bg-purple-50" aria-labelledby="packages">
+    <WaveDivider fill="#F3F0F8" flip class="bg-white" />
+    <div class="container-x py-12">
+      <h2 id="packages" class="reveal">Party packages</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        {parties.map((p) => <PriceCard name={`${p.name}:`} price={p.price} lines={p.lines} addon={p.addon} ribbon={p.ribbon as any} timebar={p.timebar as [string, number][]} />)}
+      </div>
+    </div>
+    <WaveDivider fill="#ffffff" />
+  </section>
+
+  <section class="container-x py-16" aria-labelledby="book">
+    <div class="reveal flex flex-col items-center gap-5 rounded-[32px] bg-sunny-100 p-8 text-center ring-2 ring-sunny/60 md:p-12">
+      <h2 id="book" class="text-3xl md:text-4xl">Book a party</h2>
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <a href={tel} class="btn btn-primary"><Icon name="phone" size={20} />Call (608) 88 VAULT</a>
+        <a href={mailto('Birthday Party')} class="btn btn-secondary"><Icon name="mail" size={20} />Email us</a>
+      </div>
+      <Placeholder note="confirm how parties are booked (phone/email/iClassPro) and whether to list party themes (Gymnastics / Ninja Warrior / NERF appear only on third-party sites, so they are left out)" class="text-left" />
+    </div>
+  </section>
+</BaseLayout>

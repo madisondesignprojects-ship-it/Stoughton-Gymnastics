@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Placeholder from '../components/Placeholder.astro';
+const participantFields = ["Participant's Name", 'Birthday', 'Age'];
+---
+<BaseLayout title="Participation & Liability Waiver | Stoughton Gymnastics"
+  description="Stoughton Gymnastics participation & liability waiver and medical treatment consent. Please list all children in your family on a single waiver.">
+  <PageHero title="Participation & Liability Waiver" subtitle="Stoughton Gymnastics, LLC · 201 W Main Street · Stoughton, WI 53589" crumbs={[{ label: 'Events', href: '/events' }, { label: 'Participation Waiver' }]} />
+
+  <section class="container-x pb-6 pt-8 print:pb-1 print:pt-1" aria-labelledby="how">
+    <h2 id="how" class="sr-only">How to complete</h2>
+    <p class="text-lg font-bold text-gym-purple">Please list all children in your family on this single waiver</p>
+    <div class="no-print mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+      <button type="button" class="btn btn-primary" data-print><Icon name="printer" size={20} />Print this waiver</button>
+      <span class="btn btn-secondary pointer-events-none opacity-60" aria-disabled="true"><Icon name="download" size={20} />Download PDF</span>
+    </div>
+    <div class="no-print">
+      <Placeholder note="gym to provide a PDF of the waiver (or generate one from the print view)" />
+      <Placeholder note="does iClassPro handle waivers? If yes, add a 'Sign in the Parent Portal' button" />
+    </div>
+  </section>
+
+  <section class="container-x pb-10" aria-labelledby="form-title">
+    <div class="card print-tight p-5 md:p-8">
+      <h2 id="form-title" class="text-2xl md:text-3xl">Waiver form</h2>
+      <p class="no-print mt-1 text-sm text-slate">Print this page and fill it in by hand. Nothing on this page is submitted online.</p>
+      {[1, 2].map((n) => (
+        <fieldset class="mt-6 rounded-2xl border border-purple-100 p-4 md:p-5">
+          <legend class="px-2 font-extrabold text-plum">Participant {n}</legend>
+          <div class="grid gap-4 md:grid-cols-[2fr_1fr_0.6fr_auto]">
+            {participantFields.map((f) => <div><span class="mb-1 block text-sm font-bold text-gym-purple">{f}</span><div class="field-box h-11 rounded-[14px] border-2 border-purple-100"></div></div>)}
+            <div><span class="mb-1 block text-sm font-bold text-gym-purple">&nbsp;</span><div class="flex h-11 items-center gap-4 text-sm font-bold"><span class="flex items-center gap-1.5"><span class="field-box field-check inline-block h-5 w-5 rounded border-2 border-purple-100"></span>Female</span><span class="flex items-center gap-1.5"><span class="field-box field-check inline-block h-5 w-5 rounded border-2 border-purple-100"></span>Male</span></div></div>
+          </div>
+          <div class="mt-4 flex flex-wrap items-center gap-4 text-sm font-bold text-gym-purple">Medical Insurance:
+            <span class="flex items-center gap-1.5"><span class="field-box field-check inline-block h-5 w-5 rounded border-2 border-purple-100"></span>Yes</span>
+            <span class="flex items-center gap-1.5"><span class="field-box field-check inline-block h-5 w-5 rounded border-2 border-purple-100"></span>No</span>
+          </div>
+          <div class="mt-4"><span class="mb-1 block text-sm font-bold text-gym-purple">Please list any medical conditions and/or relevant information that will assist us in teaching your child:</span><div class="field-box field-lg h-20 rounded-[14px] border-2 border-purple-100"></div></div>
+        </fieldset>
+      ))}
+      <fieldset class="mt-6 rounded-2xl border border-purple-100 p-4 md:p-5">
+        <legend class="px-2 font-extrabold text-plum">Parent/Guardian</legend>
+        <div class="grid gap-4 md:grid-cols-2">
+          {["Parent's Name", 'Home Address: City & Zip', 'Cell', 'Cell'].map((f) => <div><span class="mb-1 block text-sm font-bold text-gym-purple">{f}</span><div class="field-box h-11 rounded-[14px] border-2 border-purple-100"></div></div>)}
+          <div class="md:col-span-2"><span class="mb-1 block text-sm font-bold text-gym-purple">EMAIL Address(es)</span><div class="field-box h-11 rounded-[14px] border-2 border-purple-100"></div></div>
+        </div>
+      </fieldset>
+      <p class="mt-6 font-bold text-gym-purple">Parent agrees to the Participation Liability Waiver and Consent, as described below</p>
+      <div class="mt-4 grid gap-4 md:grid-cols-[2fr_1fr]">
+        <div><span class="mb-1 block text-sm font-bold text-gym-purple">Parent Signature required</span><div class="field-box h-12 rounded-[14px] border-2 border-purple-100"></div></div>
+        <div><span class="mb-1 block text-sm font-bold text-gym-purple">Date</span><div class="field-box h-12 rounded-[14px] border-2 border-purple-100"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-x pb-20" aria-labelledby="legal">
+    <div class="card print-legal mx-auto max-w-[76ch] p-6 md:p-10">
+      <h2 id="legal" class="text-2xl md:text-3xl">Participant Liability Waiver &amp; Medical Treatment Consent:</h2>
+      <div class="print-full mt-5" data-clamp>
+        <p class="leading-[1.75]">I, the undersigned parent/guardian of the listed student, do hereby grant the authority to the staff of Stoughton Gymnastics to render judgment concerning medical assistance in the event of an accident, injury, or illness. I further authorize simple first aid, a medical or surgical diagnosis and treatment which may be deemed necessary. By the very nature of the activity, gymnastics, tumbling &amp; trampoline and other sporting activities carry a risk of physical injury. NO matter how careful the student and coach are, no matter how many spotters are used, no matter what height is used or what landing surface exits, the risk cannot be eliminated. The risk of injury includes minor injuries such as bruises and more serious injuries such as broken bones, dislocations and muscle pulls. The risk also includes, and always includes catastrophic injuries such as permanent paralysis or event death from landings or falls on the back, neck or head. I hereby waive and hold harmless any and all Stoughton Gymnastics LLC. staff and other staff working in conjunction with Stoughton Gymnastics and any and all facilities and transportation vehicles Stoughton Gymnastics. deems necessary to use or teach from or be associated with-whether paid or volunteer-for any injuries, claims or damages in conjunction with Stoughton Gymnastics. I understand that as any athletic activity that involves motion or height, participation creates the possibility of injury. I have read and understand the risks involved in my child’s/ward’s participation at Stoughton Gymnastics. I hereby consent and wish to have my child/ward actively participate at Stoughton Gymnastics.</p>
+        <h3 class="mt-6 text-lg">Photo Release:</h3>
+        <p class="mt-2 leading-[1.75]">I agree that photos of my child or me may be used for publicity for Stoughton Gymnastics (inside the gym, newspaper, website, Facebook, mailings, etc).</p>
+      </div>
+      <button type="button" class="no-print btn btn-secondary btn-sm mt-4" data-clamp-btn aria-expanded="false" hidden>Read the full waiver</button>
+      <div class="no-print"><Placeholder note={'legal text is shown verbatim, typos included ("landing surface exits", "or event death", "Stoughton Gymnastics. deems", "Stoughton Gymnastics LLC. staff"); gym to confirm any corrections'} /></div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,16 @@
+---
+import * as L from 'lucide-static';
+interface Props { name: string; class?: string; size?: number; label?: string }
+const { name, class: cls = '', size = 24, label } = Astro.props;
+const toPascal = (s: string) => s.split('-').map((p) => p[0].toUpperCase() + p.slice(1)).join('');
+const brands: Record<string, string> = {
+  facebook: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
+  instagram: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>',
+};
+let svg: string = brands[name] ?? (L as any)[toPascal(name)];
+if (!svg) throw new Error(`Unknown icon ${name}`);
+svg = svg.replace(/<svg[^>]*>/, (tag) => tag.replace(/\sclass="[^"]*"/, '').replace(/\swidth="\d+"/, '').replace(/\sheight="\d+"/, ''));
+svg = svg.replace('<svg', `<svg width="${size}" height="${size}" class="${cls}" ${label ? `role="img" aria-label="${label}"` : 'aria-hidden="true" focusable="false"'}`)
+  .replace(/\n\s*/g, ' ');
+---
+<Fragment set:html={svg} />

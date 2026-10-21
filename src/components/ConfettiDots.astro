@@ -1,0 +1,13 @@
+---
+interface Props { class?: string; variant?: 'a' | 'b' | 'c' }
+const { class: cls = '', variant = 'a' } = Astro.props;
+const star = (x: number, y: number, r: number, c: string) =>
+  `<path d="M${x} ${y - r} Q${x + r * .18} ${y - r * .18} ${x + r} ${y} Q${x + r * .18} ${y + r * .18} ${x} ${y + r} Q${x - r * .18} ${y + r * .18} ${x - r} ${y} Q${x - r * .18} ${y - r * .18} ${x} ${y - r}Z" fill="${c}"/>`;
+const sets = {
+  a: [['c', 18, 22, 6, '#FFCB05'], ['c', 60, 12, 4, '#9C5C9B'], ['s', 96, 34, 10, '#FFCB05'], ['c', 40, 58, 5, '#417586'], ['c', 130, 18, 6, '#A99BC9'], ['s', 150, 64, 7, '#9C5C9B'], ['c', 84, 78, 3.5, '#FFCB05'], ['c', 12, 90, 4, '#A99BC9'], ['s', 118, 100, 6, '#417586']],
+  b: [['s', 20, 24, 9, '#9C5C9B'], ['c', 58, 20, 5, '#FFCB05'], ['c', 100, 44, 6, '#417586'], ['s', 140, 22, 8, '#FFCB05'], ['c', 36, 70, 4, '#A99BC9'], ['c', 124, 86, 5, '#9C5C9B'], ['s', 76, 92, 6, '#A99BC9']],
+  c: [['c', 14, 14, 4, '#FFCB05'], ['s', 44, 30, 7, '#A99BC9'], ['c', 80, 12, 5, '#417586'], ['c', 112, 40, 4, '#9C5C9B'], ['s', 150, 18, 8, '#FFCB05'], ['c', 64, 62, 3.5, '#FFCB05']],
+}[variant] as [string, number, number, number, string][];
+const body = sets.map(([t, x, y, r, c]) => t === 'c' ? `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}"/>` : star(x, y, r, c)).join('');
+---
+<svg class={`confetti pointer-events-none ${cls}`} viewBox="0 0 170 110" width="170" height="110" aria-hidden="true" focusable="false" set:html={body}></svg>

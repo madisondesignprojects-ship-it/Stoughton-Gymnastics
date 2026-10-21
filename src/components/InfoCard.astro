@@ -1,0 +1,13 @@
+---
+import Icon from './Icon.astro';
+interface Props { icon: string; title?: string; class?: string; tone?: 'white' | 'ice' | 'plum' | 'sunny' }
+const { icon, title, class: cls = '', tone = 'white' } = Astro.props;
+const bg = { white: 'bg-white', ice: 'bg-ice border-transparent', plum: 'bg-plum-50 border-transparent', sunny: 'bg-sunny-100 border-transparent' }[tone];
+---
+<div class={`card lift reveal flex gap-4 p-6 ${bg} ${cls}`}>
+  <span class="icon-circle"><Icon name={icon} /></span>
+  <div class="min-w-0">
+    {title && <h3 class="mb-1 text-lg">{title}</h3>}
+    <div class="text-purple-700"><slot /></div>
+  </div>
+</div>

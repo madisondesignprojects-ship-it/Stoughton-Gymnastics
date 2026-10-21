@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import InfoCard from '../components/InfoCard.astro';
+import LinkCard from '../components/LinkCard.astro';
+import Icon from '../components/Icon.astro';
+import ConfettiDots from '../components/ConfettiDots.astro';
+import { site, tel, mailto } from '../lib/site';
+---
+<BaseLayout title="Class Schedule & Enrollment | Stoughton Gymnastics"
+  description="All enrollments are processed in the Parent Portal. Enroll anytime - we prorate the first month's tuition. Multi-class and family discounts. Ask about a free trial class.">
+  <PageHero title="Class Schedule" subtitle={'To view the CLASS SCHEDULE, click "Schedule and Enrollment" button below.'} crumbs={[{ label: 'Class Schedule' }]} />
+
+  <section class="container-x -mt-2 pb-4 pt-6 text-center">
+    <div class="reveal mx-auto flex max-w-xl flex-col items-center gap-3 sm:flex-row sm:justify-center">
+      <a href={site.iclassproClasses} target="_blank" rel="noopener" class="btn btn-primary w-full px-8 py-4 text-xl sm:w-auto">Schedule &amp; Enrollment <Icon name="external-link" size={20} /><span class="sr-only">(opens in new tab)</span></a>
+      <a href={site.iclassproRegister} target="_blank" rel="noopener" class="btn btn-secondary w-full sm:w-auto">Create an Account<span class="sr-only">(opens in new tab)</span></a>
+    </div>
+  </section>
+
+  <section class="section pt-12" aria-labelledby="enroll-info">
+    <div class="container-x">
+      <h2 id="enroll-info" class="reveal">Enrollment Info</h2>
+      <div class="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3" data-stagger>
+        <InfoCard icon="mouse-pointer-click" title="How to Enroll">All enrollments are processed in the PARENT PORTAL. Click on "Schedule and Enrollment" on the homepage and our system will let you search for classes based on your child's age and other options you may choose as a filter.</InfoCard>
+        <InfoCard icon="credit-card" title="Monthly Tuition">All classes are billed monthly. The 1st month's tuition is due upon enrolling. Enrollment is continuous but you may withdraw at any point pending notification outlined in <a href="/tuition-and-policies" class="link">our policies section</a>.</InfoCard>
+        <InfoCard icon="calendar-plus" title="Enroll Anytime">We prorate the first month’s tuition if starting mid-month.</InfoCard>
+        <InfoCard icon="layers" title="Multi-Class Discount">50% off tuition for a 2nd+ class for the same child.</InfoCard>
+        <InfoCard icon="users" title="Family Discount">10% off tuition for 2nd child. 50% off tuition for 3rd+ child.</InfoCard>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-x pb-16" aria-labelledby="trial">
+    <div class="reveal relative overflow-hidden rounded-[32px] bg-sunny-100 px-6 py-10 text-center ring-2 ring-sunny/60 md:px-12 md:py-14">
+      <ConfettiDots class="absolute -left-4 -top-2 w-36" />
+      <ConfettiDots class="absolute -bottom-4 -right-2 w-36" variant="b" />
+      <h3 id="trial" class="relative font-display text-3xl font-bold md:text-4xl">Interested in a FREE TRIAL CLASS?</h3>
+      <p class="relative mx-auto mt-4 text-lg text-ink">Please call 608 88 VAULT or email: information@stoughtongymnastics.com to schedule your class.</p>
+      <div class="relative mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+        <a href={tel} class="btn btn-primary"><Icon name="phone" size={20} />Call 608 88 VAULT</a>
+        <a href={mailto('Free Trial Class')} class="btn btn-secondary"><Icon name="mail" size={20} />Email us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-x pb-20" aria-label="Related pages">
+    <div class="grid gap-6 md:grid-cols-2">
+      <LinkCard href="/tuition-and-policies" title="Tuition & Policies" icon="credit-card" teaser="Monthly billing, withdrawal, discounts, payment, attendance, make-up, attire, weather and closing policies." cta="Tuition & Policies" />
+      <LinkCard href="/classes-offered" title="Classes Offered" icon="star" teaser="Pre-School, Pre-School Independent Gymnastics, Recreational, Team Gymnastics and Ninja Warrior." cta="Classes Offered" />
+    </div>
+  </section>
+</BaseLayout>

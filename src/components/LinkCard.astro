@@ -1,0 +1,24 @@
+---
+import Icon from './Icon.astro';
+import Img from './Img.astro';
+interface Props { href: string; title: string; teaser: string; icon?: string; image?: string; imageAlt?: string; chips?: string[]; cta?: string; tilt?: 'l' | 'r' | ''; class?: string; imageSmall?: boolean; headingLevel?: 'h2' | 'h3' }
+const { href, title, teaser, icon, image, imageAlt = '', chips = [], cta = 'Learn more', tilt = '', class: cls = '', imageSmall = false, headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+---
+<a href={href} class={`card group lift reveal flex flex-col overflow-hidden no-underline ${tilt === 'l' ? 'md:-rotate-1' : tilt === 'r' ? 'md:rotate-1' : ''} hover:rotate-0 ${cls}`}>
+  {image && (
+    <div class={`relative overflow-hidden bg-purple-50 ${imageSmall ? 'flex h-48 items-center justify-center' : 'aspect-[4/3]'}`}>
+      <Img src={image} alt={imageAlt} sizes="(min-width:1024px) 380px, 85vw" maxWidth={800}
+        class={imageSmall ? 'h-44 w-auto rounded-2xl object-cover shadow-md transition-transform duration-500 group-hover:scale-[1.03]' : 'h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]'} />
+    </div>
+  )}
+  <div class="flex flex-1 flex-col gap-3 p-6">
+    <div class="flex items-center gap-3">
+      {icon && <span class="icon-circle"><Icon name={icon} /></span>}
+      <H class="font-sans text-xl font-extrabold text-gym-purple" style="font-size:1.25rem">{title}</H>
+    </div>
+    <p class="text-purple-700">{teaser}</p>
+    {chips.length > 0 && <ul class="flex flex-wrap gap-2">{chips.map((c) => <li class="chip chip-sunny">{c}</li>)}</ul>}
+    <span class="mt-auto inline-flex items-center gap-1.5 pt-2 font-extrabold text-teal-700">{cta}<Icon name="arrow-right" size={18} class="transition-transform group-hover:translate-x-1" /></span>
+  </div>
+</a>

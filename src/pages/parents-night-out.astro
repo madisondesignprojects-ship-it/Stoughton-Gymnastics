@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import PriceCard from '../components/PriceCard.astro';
+import InfoCard from '../components/InfoCard.astro';
+import LinkCard from '../components/LinkCard.astro';
+import Img from '../components/Img.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../lib/site';
+---
+<BaseLayout title="Parent's Night Out | Stoughton Gymnastics"
+  description="Kids will run, jump, bounce, tumble, and swing while parents have the night off. 5-7:30 pm ($20) or 5-9:00 pm ($35). Dinner served. Sibling discounts too!">
+  <PageHero title="Parent's Night Out" subtitle="Kids will run, jump, bounce, tumble, and swing while parents have the night off." crumbs={[{ label: 'Events', href: '/events' }, { label: "Parent's Night Out" }]} />
+
+  <section class="section pt-8" aria-labelledby="choose">
+    <div class="container-x">
+      <p class="eyebrow">Choose:</p>
+      <h2 id="choose" class="reveal mt-1 max-w-3xl">Choose to attend from 5 - 7:30 or 5 - 9:00 pm.</h2>
+      <div class="relative mt-10">
+        <p class="absolute -top-5 left-1/2 z-10 -translate-x-1/2 rotate-[-2deg] whitespace-nowrap rounded-full bg-sunny px-5 py-2 font-extrabold text-ink shadow-lg">Sibling discounts too!</p>
+        <div class="grid gap-6 rounded-[32px] bg-plum-50 p-4 pt-10 md:grid-cols-2 md:p-8 md:pt-12">
+          <PriceCard name="5 - 7:30 pm" price="$20" ribbon="teal" />
+          <PriceCard name="5 - 9:00 pm" price="$35" ribbon="plum" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-x grid items-center gap-10 pb-16 lg:grid-cols-[1.2fr_1fr]">
+    <div class="space-y-5">
+      <InfoCard icon="pizza" title="Dinner" tone="sunny">Dinner served:  Pizza, snacks, fruit and veggies</InfoCard>
+      <InfoCard icon="calendar" title="Upcoming Dates" tone="ice">
+        <p>Upcoming Dates: Are posted on FACEBOOK</p>
+        <a href={site.facebook} target="_blank" rel="noopener" class="btn btn-primary btn-sm mt-3"><Icon name="facebook" size={18} />Facebook<span class="sr-only">(opens in new tab)</span></a>
+      </InfoCard>
+    </div>
+    <div class="polaroid tilt-r reveal mx-auto w-full max-w-[420px]">
+      <Img src="photos/photos-09-boy-on-tumble-track.jpg" alt="Child on the tumble track in the gym" sizes="(min-width:1024px) 420px, 92vw" maxWidth={800} class="aspect-square w-full object-cover" />
+    </div>
+  </section>
+
+  <section class="container-x pb-20" aria-labelledby="another">
+    <h2 id="another" class="reveal text-3xl">Looking for another event?</h2>
+    <div class="mt-6 max-w-xl">
+      <LinkCard href="/nerf-battle" title="Check out our Nerf Battle Nights!" icon="target" image="nerf-battle/nerf-battle-01-kids-with-nerf-blasters.png" imageAlt="Kids holding Nerf blasters in the gym" imageSmall teaser="Bring your own Nerf gun" cta="Nerf Battle" />
+    </div>
+  </section>
+</BaseLayout>

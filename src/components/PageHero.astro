@@ -1,0 +1,24 @@
+---
+import ConfettiDots from './ConfettiDots.astro';
+import WaveDivider from './WaveDivider.astro';
+interface Props { title: string; subtitle?: string; crumbs?: { label: string; href?: string }[]; next?: string }
+const { title, subtitle, crumbs = [], next = '#ffffff' } = Astro.props;
+---
+<section class="page-hero relative overflow-hidden bg-gym-purple text-white">
+  <div class="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-plum/60 blur-2xl" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute -bottom-28 right-10 h-64 w-64 rounded-full bg-teal/40 blur-3xl" aria-hidden="true"></div>
+  <ConfettiDots class="absolute right-3 top-4 w-28 opacity-90 md:right-12 md:w-44" />
+  <ConfettiDots class="absolute bottom-10 left-2 hidden w-32 opacity-70 md:block" variant="c" />
+  <div class="container-x relative flex min-h-[170px] flex-col justify-center pb-8 pt-8 md:min-h-[230px] md:pt-10">
+    <nav aria-label="Breadcrumb" class="mb-2 text-sm font-semibold text-white/75">
+      <ol class="flex flex-wrap items-center gap-1.5">
+        <li><a href="/" class="hover:text-white hover:underline">Home</a></li>
+        {crumbs.map((c) => (<><li aria-hidden="true">/</li><li>{c.href ? <a href={c.href} class="hover:text-white hover:underline">{c.label}</a> : <span aria-current="page">{c.label}</span>}</li></>))}
+      </ol>
+    </nav>
+    <h1 class="max-w-3xl text-white">{title}</h1>
+    {subtitle && <p class="lead mt-3 max-w-2xl font-semibold text-purple-100">{subtitle}</p>}
+    <slot />
+  </div>
+  <WaveDivider fill={next} class="relative -mb-px" />
+</section>

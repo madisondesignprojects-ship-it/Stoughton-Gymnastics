@@ -1,0 +1,30 @@
+{
+  "name": "stoughton-gymnastics-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "prebuild": "node scripts/make-icons-og.mjs",
+    "fetch:assets": "node scripts/fetch-assets.mjs",
+    "dev": "astro dev",
+    "build": "astro build",
+    "build:launch": "npm run build && node scripts/check-placeholders.mjs",
+    "check:placeholders": "node scripts/check-placeholders.mjs",
+    "check:verbatim": "node scripts/check-verbatim.mjs",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/nunito": "^5.3.0",
+    "@fontsource/playfair-display": "^5.3.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.4.1",
+    "lucide-static": "^1.61.0",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.3"
+  }
+}

@@ -1,0 +1,15 @@
+---
+interface Props { size?: 'sm' | 'lg'; class?: string }
+const { size = 'sm', class: cls = '' } = Astro.props;
+const levels = [
+  ['Copper', '#B87333'], ['Bronze', '#CD7F32'], ['Silver', '#C0C0C0'], ['Gold', '#D4AF37'], ['Platinum', '#E5E4E2'], ['Diamond', '#B9F2FF'],
+];
+---
+<ul class={`flex flex-wrap gap-2 ${cls}`} aria-label="XCEL levels">
+  {levels.map(([n, c]) => (
+    <li class="chip bg-white pl-1 text-ink ring-1 ring-purple-100">
+      <span class={`medal ${size === 'lg' ? 'h-9 w-9' : 'h-6 w-6'}`} style={`background: radial-gradient(circle at 30% 30%, #fff9 0, transparent 45%), linear-gradient(135deg, ${c}, color-mix(in srgb, ${c} 60%, #000))`} aria-hidden="true"></span>
+      {n}
+    </li>
+  ))}
+</ul>

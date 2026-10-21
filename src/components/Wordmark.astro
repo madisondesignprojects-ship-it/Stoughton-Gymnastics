@@ -1,0 +1,12 @@
+---
+// [PLACEHOLDER - confirm with gym: is there an official logo file?] (noted in README + Contact list)
+interface Props { dark?: boolean; class?: string }
+const { dark = false, class: cls = '' } = Astro.props;
+---
+<span class={`inline-flex flex-col leading-none ${cls}`}>
+  <span class={`font-display text-[1.6rem] font-bold tracking-tight ${dark ? 'text-white' : 'text-gym-purple'}`}>Stoughton</span>
+  <span class={`mt-0.5 flex items-center gap-1 text-[0.66rem] font-extrabold uppercase tracking-[0.32em] ${dark ? 'text-purple-100' : 'text-plum'}`}>
+    Gymnastics
+    <svg viewBox="0 0 20 20" width="12" height="12" aria-hidden="true"><path d="M10 0 Q11.8 8.2 20 10 Q11.8 11.8 10 20 Q8.2 11.8 0 10 Q8.2 8.2 10 0Z" fill="#FFCB05"/></svg>
+  </span>
+</span>

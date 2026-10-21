@@ -1,0 +1,5 @@
+/blank        /    301
+/home         /    301
+/about-us     /    301
+# Only if the gym declines publishing coaches:
+# /coach-info  /   302

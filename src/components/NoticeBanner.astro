@@ -1,0 +1,14 @@
+---
+// Dismissible notice (7.13). Off by default; shows the next CLOSED line from calendar.json when enabled.
+import { SHOW_NOTICE_BANNER } from '../flags.mjs';
+import { upcomingClosed } from '../lib/calendar';
+const next = upcomingClosed();
+---
+{SHOW_NOTICE_BANNER && next && (
+  <div class="no-print bg-sunny-100 text-ink" data-notice={next.text} hidden>
+    <div class="container-x flex items-center justify-between gap-4 py-2 text-sm font-bold">
+      <span>{next.month}: {next.text}</span>
+      <button type="button" class="inline-flex h-11 items-center rounded-full px-3 hover:bg-sunny" data-notice-close>Dismiss</button>
+    </div>
+  </div>
+)}

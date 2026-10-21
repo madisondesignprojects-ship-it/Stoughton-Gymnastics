@@ -1,0 +1,22 @@
+---
+import Placeholder from './Placeholder.astro';
+import type { CalMonth } from '../lib/calendar';
+interface Props { m: CalMonth }
+const { m } = Astro.props;
+---
+<article class="card p-6">
+  <h3 class="chip chip-plum px-4 py-1.5 text-lg">{m.month}</h3>
+  <ul class="mt-4 space-y-3">
+    {m.items.map((it) => (
+      <li class="flex items-start gap-3">
+        {it.type === 'closed'
+          ? <span class="mt-0.5 shrink-0 rounded-full border-2 border-mat-red px-2 py-0.5 text-xs font-extrabold tracking-wide text-ink">CLOSED</span>
+          : <span class="mt-2 h-3 w-3 shrink-0 rounded-full bg-teal" aria-hidden="true"></span>}
+        <span class="min-w-0">
+          {it.type === 'closed' && <span class="sr-only">Closed: </span>}{it.text}
+          {it.flag && <Placeholder note={it.flag} class="mt-2" />}
+        </span>
+      </li>
+    ))}
+  </ul>
+</article>

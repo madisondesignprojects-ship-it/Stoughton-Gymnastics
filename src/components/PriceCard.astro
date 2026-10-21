@@ -1,0 +1,35 @@
+---
+import Icon from './Icon.astro';
+interface Props { name: string; price: string; lines?: string[]; addon?: string; ribbon?: 'sunny' | 'purple' | 'teal' | 'plum'; timebar?: [string, number][]; eyebrow?: string }
+const { name, price, lines = [], addon, ribbon = 'sunny', timebar, eyebrow } = Astro.props;
+const rib = { sunny: 'bg-sunny', purple: 'bg-purple-300', teal: 'bg-teal', plum: 'bg-plum-400' }[ribbon];
+const total = timebar ? timebar.reduce((a, [, m]) => a + m, 0) : 0;
+---
+<article class="card lift reveal relative flex flex-col overflow-hidden">
+  <div class={`h-3 ${rib}`} aria-hidden="true"></div>
+  <div class="flex flex-1 flex-col p-6 md:p-8">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h3 class="text-2xl">{name}</h3>
+    <p class="mt-2 font-display text-5xl font-bold text-plum md:text-6xl">{price}</p>
+    {lines.length > 0 && (
+      <ul class="mt-5 space-y-3">
+        {lines.map((l) => <li class="flex gap-3"><span class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ice text-teal-700"><Icon name="check" size={16} /></span><span>{l}</span></li>)}
+      </ul>
+    )}
+    {timebar && (
+      <div class="mt-6" aria-hidden="true">
+        <div class="flex h-9 overflow-hidden rounded-full text-xs font-extrabold">
+          {timebar.map(([label, min], i) => (
+            <div class={`flex items-center justify-center ${i === 0 ? 'bg-gym-purple text-white' : 'bg-sunny text-ink'}`} style={`width:${(min / total) * 100}%`}>{label} {min} min</div>
+          ))}
+        </div>
+      </div>
+    )}
+    <slot />
+    {addon && (
+      <div class="mt-6 rounded-2xl border-2 border-dashed border-teal/50 bg-ice p-4">
+        <p class="flex gap-2 text-[0.95rem] font-semibold text-gym-purple"><Icon name="cake" class="shrink-0 text-plum" size={20} /><span><span class="sr-only">Add-on: </span>{addon}</span></p>
+      </div>
+    )}
+  </div>
+</article>

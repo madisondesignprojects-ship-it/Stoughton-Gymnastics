@@ -1,0 +1,23 @@
+{
+  "name": "Stoughton Gymnastics",
+  "legalName": "Stoughton Gymnastics, LLC",
+  "tagline": "Gymnastics, Pre-School & Ninja Warrior",
+  "address": { "street": "201 W. Main Street", "streetShort": "201 W. Main St", "city": "Stoughton", "state": "WI", "zip": "53589" },
+  "phoneBranded": "(608) 88 VAULT",
+  "phoneBrandedDots": "608.88 VAULT",
+  "phoneBrandedSpaces": "608 88 VAULT",
+  "phoneE164": "+16088882858",
+  "phoneSchema": "+1-608-888-2858",
+  "email": "information@stoughtongymnastics.com",
+  "emailDisplay": "Information@stoughtongymnastics.com",
+  "facebook": "https://www.facebook.com/StoughtonGymnastics",
+  "instagram": "https://www.instagram.com/stoughtongymnastics/",
+  "iclassproClasses": "https://app.iclasspro.com/parentportal/stoughtongymnastics/classes",
+  "iclassproRegister": "https://app.iclasspro.com/parentportal/stoughtongymnastics/register",
+  "iclassproPortal": "https://app.iclasspro.com/parentportal/stoughtongymnastics",
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=201+W+Main+St+Stoughton+WI+53589",
+  "mapEmbed": "https://www.google.com/maps?q=201+W+Main+St,+Stoughton,+WI+53589&output=embed",
+  "hoursText": "Our typical business hours are 3 pm to 8 pm.",
+  "hoursConfirmed": false,
+  "geo": { "lat": 42.916673, "lng": -89.221962 }
+}

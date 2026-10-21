@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import Icon from '../components/Icon.astro';
+import ConfettiDots from '../components/ConfettiDots.astro';
+import LinkCard from '../components/LinkCard.astro';
+import Placeholder from '../components/Placeholder.astro';
+import { site, tel } from '../lib/site';
+---
+<BaseLayout title="Nerf Battle Nights | Stoughton Gymnastics" ogImage="/og/nerf.jpg"
+  description={'Nerf Battle at Stoughton Gymnastics: $15-$20 depending on length of event. Bring your own Nerf gun - safety glasses and "ammo" provided. Space limited to 20 kids per session.'}>
+  <PageHero title="Nerf Battle" crumbs={[{ label: 'Events', href: '/events' }, { label: 'Nerf Battle' }]} />
+  <section class="section pt-8">
+    <div class="container-x grid items-start gap-12 md:grid-cols-[1.25fr_1fr]">
+      <div class="card reveal order-2 p-6 md:order-1 md:p-8">
+        <ul class="space-y-5">
+          <li class="flex gap-4"><span class="icon-circle"><Icon name="calendar" /></span><div><p><strong class="text-gym-purple">Next Date:</strong>   To be determined, it will be posted on Facebook.</p>
+            <a href={site.facebook} target="_blank" rel="noopener" class="btn btn-secondary btn-sm mt-3"><Icon name="facebook" size={18} />Facebook<span class="sr-only">(opens in new tab)</span></a></div></li>
+          <li class="flex gap-4"><span class="icon-circle"><Icon name="dollar-sign" /></span><p class="pt-2">$15 - $20 depending on length of event.</p></li>
+          <li class="flex gap-4"><span class="icon-circle"><Icon name="target" /></span><p class="pt-2">Kids will get some target practice and set up a battlefield using mats and setting up gym equipment.</p></li>
+          <li class="flex gap-4"><span class="icon-circle"><Icon name="glasses" /></span><p class="pt-2">Safety glasses are required- we will provide them &amp; also provide the "ammo"</p></li>
+        </ul>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <p class="chip chip-sunny px-4 py-2 text-base"><Icon name="zap" size={18} class="text-plum" />Bring your own Nerf gun</p>
+          <p class="chip chip-sunny px-4 py-2 text-base"><Icon name="users" size={18} class="text-plum" />Space limited to 20 kids per session</p>
+        </div>
+      </div>
+      <div class="relative order-1 flex flex-col items-center md:order-2">
+        <ConfettiDots class="absolute -top-6 left-0 w-36 md:left-4" />
+        <div class="polaroid tilt-l relative z-[1] mt-6">
+          <Img src="nerf-battle/nerf-battle-01-kids-with-nerf-blasters.png" alt="Kids holding Nerf blasters in the gym" eager sizes="208px" class="h-auto w-[208px]" />
+        </div>
+        <ConfettiDots class="absolute bottom-6 right-0 w-36 md:right-4" variant="b" />
+        <Placeholder inline note="ask the gym for a larger version of this photo (source is 208×277)" class="mt-6" />
+      </div>
+    </div>
+    <div class="container-x mt-14 grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+      <div class="max-w-xl"><LinkCard href="/parents-night-out" title="Looking for another event?" icon="moon" teaser="Kids will run, jump, bounce, tumble, and swing while parents have the night off." cta="Parent's Night Out" /></div>
+      <p class="text-center text-lg font-bold">Questions? <a href={tel} class="link">Call (608) 88 VAULT</a></p>
+    </div>
+  </section>
+</BaseLayout>

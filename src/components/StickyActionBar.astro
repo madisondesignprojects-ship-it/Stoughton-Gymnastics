@@ -1,0 +1,9 @@
+---
+import Icon from './Icon.astro';
+import { site, tel } from '../lib/site';
+---
+<nav aria-label="Quick actions" class="sticky-bar fixed inset-x-0 bottom-0 z-50 grid grid-cols-3 border-t border-purple-100 bg-white md:hidden" style="padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -8px 24px -12px rgb(65 54 89 / .3)" data-sticky-bar>
+  <a href={tel} class="flex h-16 flex-col items-center justify-center gap-0.5 text-sm font-extrabold text-gym-purple"><Icon name="phone" size={22} class="text-plum" />Call</a>
+  <a href={site.directions} target="_blank" rel="noopener" class="flex h-16 flex-col items-center justify-center gap-0.5 text-sm font-extrabold text-gym-purple"><Icon name="map-pin" size={22} class="text-teal" />Directions<span class="sr-only">(opens in new tab)</span></a>
+  <a href={site.iclassproClasses} target="_blank" rel="noopener" class="m-2 flex flex-col items-center justify-center gap-0.5 rounded-2xl bg-plum text-sm font-extrabold text-white"><Icon name="calendar-plus" size={22} />Enroll<span class="sr-only">(opens in new tab)</span></a>
+</nav>

@@ -1,0 +1,16 @@
+[
+  {"month": "June 2026", "ym": "2026-06", "items": [
+    {"type": "classes", "text": "June classes run from Tuesday June 2 through Monday June 29"},
+    {"type": "closed",  "text": "CLOSED Tues June 30"}]},
+  {"month": "July 2026", "ym": "2026-07", "items": [
+    {"type": "closed",  "text": "CLOSED July 1 through July 5"},
+    {"type": "classes", "text": "July classes are held July 6 through July 30"}]},
+  {"month": "Aug 2026", "ym": "2026-08", "items": [
+    {"type": "classes", "text": "Aug classes are held Aug 30 through Aug 20",
+     "flag": "published dates are impossible (\"Aug 30 through Aug 20\"); please send the correct August dates"},
+    {"type": "closed",  "text": "CLOSED Aug 21 to 31"}]},
+  {"month": "September", "ym": "2026-09", "items": [
+    {"type": "closed",  "text": "CLOSED Tues Sept 1"},
+    {"type": "classes", "text": "September Classes start on Wednesday Sept 2"},
+    {"type": "closed",  "text": "CLOSED Monday Sept 7"}]}
+]

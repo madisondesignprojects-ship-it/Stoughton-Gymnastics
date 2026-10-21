@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Placeholder from '../components/Placeholder.astro';
+import { splitCalendar } from '../lib/calendar';
+import Month from '../components/CalendarMonth.astro';
+import { site } from '../lib/site';
+const { upcoming, past } = splitCalendar();
+---
+<BaseLayout title="Calendar & Closed Dates | Stoughton Gymnastics" description="Monthly class dates and gym closures at Stoughton Gymnastics in Stoughton, WI.">
+  <PageHero title="Calendar" crumbs={[{ label: 'Events', href: '/events' }, { label: 'Calendar' }]} />
+  <section class="section pt-8">
+    <div class="container-x">
+      <Placeholder note="gym to supply the current calendar (Oct 2026 onward); every date listed below is now in the past" />
+      {upcoming.length > 0 ? (
+        <div class="mt-6 grid gap-6 md:grid-cols-2">{upcoming.map((m) => <Month m={m} />)}</div>
+      ) : (
+        <div class="reveal mt-6 flex flex-col items-center gap-4 rounded-[32px] bg-purple-50 p-8 text-center md:p-12">
+          <span class="icon-circle h-14 w-14 bg-white"><Icon name="calendar" size={28} /></span>
+          <p class="text-xl font-extrabold text-gym-purple">Closures are also posted on Facebook</p>
+          <a href={site.facebook} target="_blank" rel="noopener" class="btn btn-primary"><Icon name="facebook" size={20} />Facebook<span class="sr-only">(opens in new tab)</span></a>
+        </div>
+      )}
+      {past.length > 0 && (
+        <details class="acc mt-8">
+          <summary><span>Past dates</span><Icon name="chevron-down" class="chev text-plum" /></summary>
+          <div class="acc-body grid gap-6 pt-2 md:grid-cols-2">{past.map((m) => <Month m={m} />)}</div>
+        </details>
+      )}
+    </div>
+  </section>
+</BaseLayout>
