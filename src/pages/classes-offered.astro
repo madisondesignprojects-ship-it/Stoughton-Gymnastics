@@ -15,7 +15,7 @@ const circuitIcons = ['arrow-up-from-line', 'route', 'minus', 'flame'];
   description="Pre-School (ages 2-3 & 3-4), Pre-School Independent Gymnastics (ages 4-5), Recreational Gymnastics (ages 4-18), XCEL Team Gymnastics and Ninja Warrior classes in Stoughton, WI.">
   <PageHero title="Classes Offered" crumbs={[{ label: 'Classes Offered' }]} />
 
-  <nav aria-label="Jump to a class" class="no-scrollbar sticky top-16 z-20 -mt-2 overflow-x-auto border-b border-purple-100 bg-white/95 backdrop-blur lg:top-[108px]">
+  <nav aria-label="Jump to a class" class="no-scrollbar sticky top-[69px] z-20 -mt-2 overflow-x-auto border-b border-purple-100 bg-page/95 backdrop-blur lg:top-[101px]">
     <ul class="container-x flex w-max gap-2 py-3 lg:w-full lg:justify-center">
       {jump.map(([id, l]) => <li><a href={`#${id}`} class="chip chip-ice min-h-10 whitespace-nowrap px-4 hover:bg-teal hover:text-white">{l}</a></li>)}
     </ul>
@@ -23,9 +23,9 @@ const circuitIcons = ['arrow-up-from-line', 'route', 'minus', 'flame'];
 
   <div class="container-x section pt-10">
     <Placeholder note="class photos below are reused from the Photos/Team galleries (the original page has no images); the gym may supply class-specific photos" />
-    <div class="mt-8 space-y-16 md:space-y-24">
+    <div class="mt-8 space-y-8 md:space-y-12">
       {programs.classes.map((c, i) => (
-        <article id={c.id} class={`reveal grid items-center gap-8 md:grid-cols-2 md:gap-12`} aria-labelledby={`${c.id}-h`}>
+        <article id={c.id} class={`reveal grid items-center gap-8 rounded-[28px] p-5 md:grid-cols-2 md:gap-12 md:p-10 ${['bg-band-plum', 'bg-band-teal', 'bg-band'][i % 3]}`} aria-labelledby={`${c.id}-h`}>
           <div class={`relative ${i % 2 ? 'md:order-2' : ''}`}>
             <div class={`polaroid ${i % 2 ? 'tilt-r' : 'tilt-l'} w-full`}>
               <Img src={c.image} alt={c.imageAlt} sizes="(min-width:768px) 45vw, 92vw" class="aspect-[4/3] w-full object-cover" />
@@ -61,8 +61,8 @@ const circuitIcons = ['arrow-up-from-line', 'route', 'minus', 'flame'];
     </div>
   </div>
 
-  <section class="relative bg-purple-50" aria-labelledby="pricing-title">
-    <WaveDivider fill="#F3F0F8" flip class="bg-white" />
+  <section class="relative bg-band" aria-labelledby="pricing-title">
+    <WaveDivider fill="#EEE5F6" flip class="bg-page" />
     <div class="container-x section pt-10">
       <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <h2 id="pricing-title">Programs &amp; Pricing</h2>
@@ -99,6 +99,6 @@ const circuitIcons = ['arrow-up-from-line', 'route', 'minus', 'flame'];
         ))}
       </ul>
     </div>
-    <WaveDivider fill="#ffffff" />
+    <WaveDivider fill="#F8F3FB" />
   </section>
 </BaseLayout>

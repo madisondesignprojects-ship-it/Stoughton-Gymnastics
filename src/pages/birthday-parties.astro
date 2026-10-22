@@ -28,15 +28,15 @@ import { tel, mailto } from '../lib/site';
     </div>
   </section>
 
-  <section class="relative bg-purple-50" aria-labelledby="packages">
-    <WaveDivider fill="#F3F0F8" flip class="bg-white" />
+  <section class="relative bg-band" aria-labelledby="packages">
+    <WaveDivider fill="#EEE5F6" flip class="bg-page" />
     <div class="container-x py-12">
       <h2 id="packages" class="reveal">Party packages</h2>
       <div class="mt-8 grid gap-6 md:grid-cols-2">
         {parties.map((p) => <PriceCard name={`${p.name}:`} price={p.price} lines={p.lines} addon={p.addon} ribbon={p.ribbon as any} timebar={p.timebar as [string, number][]} />)}
       </div>
     </div>
-    <WaveDivider fill="#ffffff" />
+    <WaveDivider fill="#F8F3FB" />
   </section>
 
   <section class="container-x py-16" aria-labelledby="book">

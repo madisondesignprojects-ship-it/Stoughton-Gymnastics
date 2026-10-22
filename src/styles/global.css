@@ -9,6 +9,7 @@
   --color-ice: #E9F4F6; --color-ink: #110A17; --color-slate: #656F8C;
   --color-purple-50: #F3F0F8; --color-purple-100: #E4DEF0; --color-purple-300: #A99BC9; --color-purple-700: #2E2640;
   --color-plum-50: #F7EEF6; --color-plum-400: #9C5C9B; --color-teal-50: #E9F4F6; --color-teal-700: #356271;
+  --color-page: #F8F3FB; --color-band: #EEE5F6; --color-band-teal: #E3F1F3; --color-band-plum: #F6E9F3;
   --color-sunny: #FFCB05; --color-sunny-100: #FFF6D6; --color-mat-red: #ED1C24;
   --font-display: "Playfair Display", Georgia, serif;
   --font-sans: "Nunito", system-ui, sans-serif;
@@ -20,7 +21,7 @@
 
 @layer base {
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 88px; }
-  body { @apply font-sans bg-white text-purple-700 antialiased; font-size: clamp(1rem, .96rem + .2vw, 1.125rem); line-height: 1.65; }
+  body { @apply font-sans bg-page text-purple-700 antialiased; font-size: clamp(1rem, .96rem + .2vw, 1.125rem); line-height: 1.65; }
   h1, h2 { @apply font-display text-gym-purple; font-weight: 700; line-height: 1.15; letter-spacing: -.01em; }
   h1 { font-size: clamp(2.25rem, 1.7rem + 2.6vw, 3.5rem); }
   h2 { font-size: clamp(1.75rem, 1.45rem + 1.4vw, 2.5rem); }
@@ -79,6 +80,31 @@
   .acc .acc-body p + p { @apply mt-3; }
 
   .prose-sg p + p { @apply mt-4; }
+
+  /* Colour bands + soft patterns (v2: less blank white) */
+  .bg-dots { background-image: radial-gradient(rgb(98 57 98 / .10) 1.5px, transparent 1.6px); background-size: 22px 22px; }
+  .bg-dots-teal { background-image: radial-gradient(rgb(65 117 134 / .13) 1.5px, transparent 1.6px); background-size: 22px 22px; }
+  .hero-home { background:
+      radial-gradient(60rem 30rem at 100% 0%, rgb(65 117 134 / .16), transparent 60%),
+      radial-gradient(50rem 30rem at 0% 100%, rgb(98 57 98 / .16), transparent 60%),
+      linear-gradient(160deg, #F3E6F2 0%, #ECE3F6 45%, #E2F0F3 100%); }
+  .accent-stripe { height: 5px; background: linear-gradient(90deg, var(--color-plum), var(--color-plum-400) 30%, var(--color-teal) 60%, var(--color-sunny)); }
+  .card-top-plum { border-top: 6px solid var(--color-plum-400); }
+  .card-top-teal { border-top: 6px solid var(--color-teal); }
+  .card-top-sunny { border-top: 6px solid var(--color-sunny); }
+  .card-top-purple { border-top: 6px solid var(--color-purple-300); }
+
+  /* Home "start here" tiles (the original's nine pill buttons, grouped) */
+  .qtile { @apply relative flex h-full min-h-[88px] flex-col items-center justify-center gap-1.5 rounded-2xl px-2 py-3 text-center text-[0.9rem] font-extrabold leading-tight no-underline sm:min-h-[96px] sm:text-base;
+    box-shadow: 0 8px 18px -10px rgb(65 54 89 / .45); transition: transform .2s var(--ease-spring), box-shadow .2s; }
+  .qtile:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 14px 26px -12px rgb(65 54 89 / .55); }
+  .qtile .qi { @apply inline-flex h-10 w-10 items-center justify-center rounded-full; }
+  .qt-plum { @apply bg-plum text-white; } .qt-plum .qi { @apply bg-white/20 text-white; }
+  .qt-purple { @apply bg-gym-purple text-white; } .qt-purple .qi { @apply bg-white/15 text-sunny; }
+  .qt-teal { @apply bg-teal text-white; } .qt-teal .qi { @apply bg-white/20 text-white; }
+  .qt-sunny { @apply bg-sunny text-ink; } .qt-sunny .qi { @apply bg-white/60 text-plum; }
+  .qt-light { @apply bg-white text-gym-purple ring-2 ring-purple-100; } .qt-light .qi { @apply bg-plum-50 text-plum; }
+
 }
 
 /* Scroll reveal (only when JS + motion allowed) */

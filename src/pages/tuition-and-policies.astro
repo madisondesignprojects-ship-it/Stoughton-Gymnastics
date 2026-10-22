@@ -30,7 +30,7 @@ const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
   <PageHero title="Tuition & Policies" crumbs={[{ label: 'Class Schedule', href: '/class-schedule' }, { label: 'Tuition & Policies' }]} />
 
   <!-- Mobile chip index -->
-  <nav aria-label="On this page" class="no-scrollbar sticky top-16 z-20 -mt-2 overflow-x-auto border-b border-purple-100 bg-white/95 backdrop-blur lg:hidden">
+  <nav aria-label="On this page" class="no-scrollbar sticky top-[69px] z-20 -mt-2 overflow-x-auto border-b border-purple-100 bg-page/95 backdrop-blur lg:hidden">
     <ul class="flex w-max gap-2 px-5 py-3">
       {groups.flatMap((g) => g.items).map((it) => <li><a href={`#${it.id}`} class="chip chip-ice min-h-10 whitespace-nowrap">{it.title}</a></li>)}
     </ul>

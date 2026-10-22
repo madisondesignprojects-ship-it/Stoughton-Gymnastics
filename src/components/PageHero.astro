@@ -2,9 +2,9 @@
 import ConfettiDots from './ConfettiDots.astro';
 import WaveDivider from './WaveDivider.astro';
 interface Props { title: string; subtitle?: string; crumbs?: { label: string; href?: string }[]; next?: string }
-const { title, subtitle, crumbs = [], next = '#ffffff' } = Astro.props;
+const { title, subtitle, crumbs = [], next = '#F8F3FB' } = Astro.props;
 ---
-<section class="page-hero relative overflow-hidden bg-gym-purple text-white">
+<section class="page-hero relative overflow-hidden bg-gym-purple text-white" style="background:linear-gradient(120deg,#413659 0%,#623962 55%,#3d6b7b 120%)">
   <div class="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-plum/60 blur-2xl" aria-hidden="true"></div>
   <div class="pointer-events-none absolute -bottom-28 right-10 h-64 w-64 rounded-full bg-teal/40 blur-3xl" aria-hidden="true"></div>
   <ConfettiDots class="absolute right-3 top-4 w-28 opacity-90 md:right-12 md:w-44" />

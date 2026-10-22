@@ -6,7 +6,7 @@ import Icon from './Icon.astro';
 import { img } from '../lib/images';
 import { site } from '../lib/site';
 interface Props { prev?: string }
-const { prev = '#ffffff' } = Astro.props;
+const { prev = '#F8F3FB' } = Astro.props;
 // Original mobile header background (purple-tinted bars photo), kept as a 15% texture.
 const tex = await getImage({ src: img('global/hero-mobile-girls-hanging-on-bars-purple-tint.jpg'), width: 500, format: 'webp' });
 ---

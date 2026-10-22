@@ -8,12 +8,13 @@ const utility = nav.filter((n) => n.utility);
 const enroll = nav.find((n) => n.primary)!;
 ---
 <header class="site-header sticky top-0 z-40" data-header>
+  <div class="accent-stripe" aria-hidden="true"></div>
   <!-- Utility row (desktop) -->
-  <div class="hidden bg-purple-50 lg:block">
-    <div class="container-x flex h-8 items-center justify-end gap-6 text-[13px] font-semibold text-slate">
-      <a href={tel} class="inline-flex items-center gap-1.5 hover:text-gym-purple"><Icon name="phone" size={14} />{site.phoneBranded}</a>
+  <div class="hidden bg-gym-purple lg:block">
+    <div class="container-x flex h-8 items-center justify-end gap-6 text-[13px] font-semibold text-purple-100">
+      <a href={tel} class="inline-flex items-center gap-1.5 hover:text-white"><Icon name="phone" size={14} />{site.phoneBranded}</a>
       {utility.map((u) => (
-        <a href={u.href} target="_blank" rel="noopener" class="inline-flex items-center gap-1 hover:text-gym-purple">{u.label}<Icon name="external-link" size={12} /><span class="sr-only">(opens in new tab)</span></a>
+        <a href={u.href} target="_blank" rel="noopener" class="inline-flex items-center gap-1 hover:text-white">{u.label}<Icon name="external-link" size={12} /><span class="sr-only">(opens in new tab)</span></a>
       ))}
     </div>
   </div>

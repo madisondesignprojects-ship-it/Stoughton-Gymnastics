@@ -12,28 +12,52 @@ import programs from '../content/programs.json';
 import { site, tel } from '../lib/site';
 const main = programs.home.filter((p) => !p.team);
 const teams = programs.home.filter((p) => p.team);
+// The original homepage opens with nine pill buttons, in this order (build script 7.1 / original nav).
+const quick = [
+  { label: 'About Us', href: '#about', icon: 'heart-handshake', tone: 'plum' },
+  { label: 'Enroll', href: site.iclassproClasses, external: true, icon: 'clipboard-pen', tone: 'sunny' },
+  { label: 'Class Schedule', href: '/class-schedule', icon: 'calendar-days', tone: 'teal' },
+  { label: 'Classes Offered', href: '/classes-offered', icon: 'medal', tone: 'purple' },
+  { label: 'Events', href: '/events', icon: 'party-popper', tone: 'plum' },
+  { label: 'Photos', href: '/photos', icon: 'camera', tone: 'teal' },
+  { label: 'Contact', href: '/contact', icon: 'mail', tone: 'purple' },
+  { label: 'Create an Account', href: site.iclassproRegister, external: true, icon: 'user-plus', tone: 'light' },
+  { label: 'Member Login', href: site.iclassproPortal, external: true, icon: 'log-in', tone: 'light' },
+];
 ---
 <BaseLayout
   title="Stoughton Gymnastics | Gymnastics, Pre-School & Ninja Warrior in Stoughton, WI"
+  enrollPrev="#EEE5F6"
   description="Gymnastics for kids ages 3 to 18 in beautiful Downtown Stoughton at 201 W. Main Street. Pre-School, Recreational Gymnastics, XCEL Team and Ninja Warrior. Enroll at any point in the month.">
 
-  <!-- 1. Hero -->
-  <section class="relative overflow-hidden bg-white">
-    <div class="pointer-events-none absolute -right-32 -top-24 h-[28rem] w-[28rem] rounded-full bg-purple-50" aria-hidden="true"></div>
-    <div class="pointer-events-none absolute -bottom-40 -left-28 h-[24rem] w-[24rem] rounded-full bg-plum-50" aria-hidden="true"></div>
-    <div class="container-x relative grid items-center gap-10 pb-10 pt-8 md:pt-12 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:pb-16 lg:pt-16">
+  <!-- 1. Hero: the original's nine main buttons, grouped as the first thing you see -->
+  <section class="hero-home relative overflow-hidden">
+    <div class="bg-dots pointer-events-none absolute inset-0 opacity-70" aria-hidden="true"></div>
+    <div class="container-x relative grid items-center gap-8 pb-8 pt-5 md:pt-8 lg:grid-cols-[1.15fr_1fr] lg:gap-12 lg:pb-12 lg:pt-8">
       <div>
-        <p class="chip chip-ice"><Icon name="map-pin" size={16} class="text-teal-700" />201 W. Main St</p>
-        <h1 class="mt-4">Stoughton Gymnastics</h1>
-        <p class="mt-2 text-xl font-extrabold text-plum md:text-2xl">Gymnastics, Pre-School &amp; Ninja Warrior</p>
-        <p class="lead mt-5">We strive to teach children how to strengthen their bodies and build skills that are used in nearly every sport.  We make learning and fitness fun.</p>
-        <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+        <p class="chip chip-ice hidden bg-white/80 sm:inline-flex"><Icon name="map-pin" size={16} class="text-teal-700" />201 W. Main St</p>
+        <h1 class="text-[2.1rem] leading-[1.1] sm:mt-3 sm:text-[2.6rem] lg:text-[3.1rem]">Stoughton Gymnastics</h1>
+        <p class="mt-1 text-lg font-extrabold text-plum md:text-xl">Gymnastics, Pre-School &amp; Ninja Warrior</p>
+        <nav aria-label="Start here" class="mt-4 md:mt-5">
+          <ul class="grid grid-cols-3 gap-2.5 sm:gap-3">
+            {quick.map((q) => (
+              <li>
+                <a href={q.href} target={q.external ? '_blank' : undefined} rel={q.external ? 'noopener' : undefined} class={`qtile qt-${q.tone}`}>
+                  <span class="qi" aria-hidden="true"><Icon name={q.icon} size={21} /></span>
+                  <span>{q.label}</span>
+                  {q.external && <span class="sr-only">(opens in new tab)</span>}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div class="mt-5 flex flex-col gap-3 sm:flex-row">
           <a href={site.iclassproClasses} target="_blank" rel="noopener" class="btn btn-primary text-lg">Schedule &amp; Enrollment <Icon name="external-link" size={18} /><span class="sr-only">(opens in new tab)</span></a>
           <a href={tel} class="btn btn-secondary text-lg"><Icon name="phone" size={20} />Call 608.88 VAULT</a>
         </div>
         <p class="mt-4 inline-flex items-center gap-2 text-[0.95rem] font-bold text-teal-700"><Icon name="sparkles" size={18} class="text-plum-400" />Enroll at any point in the month and your fees are prorated!</p>
       </div>
-      <div class="relative mx-auto mt-6 w-full max-w-[500px] lg:mt-0 lg:max-w-[560px]">
+      <div class="relative mx-auto mt-2 w-full max-w-[500px] lg:mt-0 lg:max-w-[540px]">
         <ConfettiDots class="absolute -left-6 -top-10 z-10 w-36" />
         <div class="polaroid tilt-r w-full">
           <Img src="global/hero-desktop-girls-hanging-on-bars.jpg" alt="Young gymnasts hanging upside down and swinging on the bars at Stoughton Gymnastics" eager sizes="(min-width:1024px) 500px, 92vw" class="w-full" />
@@ -42,17 +66,19 @@ const teams = programs.home.filter((p) => p.team);
         <Placeholder inline note="request a high-resolution original or new hero photos (current file is 500×333)" class="mt-5" />
       </div>
     </div>
-    <WaveDivider fill="#ffffff" class="relative" />
+    <WaveDivider fill="#EEE5F6" class="relative" />
   </section>
 
   <!-- 2. About Us -->
-  <section class="section pt-6" aria-labelledby="about-title">
-    <div class="container-x grid items-center gap-12 lg:grid-cols-12">
+  <section id="about" class="section relative bg-band pt-6" aria-labelledby="about-title">
+    <div class="bg-dots pointer-events-none absolute inset-0 opacity-60" aria-hidden="true"></div>
+    <div class="container-x relative grid items-center gap-12 lg:grid-cols-12">
       <div class="reveal lg:col-span-7">
         <p class="eyebrow">Welcome</p>
         <h2 id="about-title" class="mt-1">About Us</h2>
         <div class="prose-sg mt-5 text-lg">
           <p>Stoughton Gymnastics provides full gymnastics programming that includes instruction on the Bars, Beam, Floor and Vault. Participants will rotate through the gymnastic events and utilize the tumble track (long trampoline) to work on skill development, coordination and have FUN.</p>
+          <p>We strive to teach children how to strengthen their bodies and build skills that are used in nearly every sport.  We make learning and fitness fun.</p>
           <p>Stoughton Gymnastics is located in beautiful Downtown Stoughton at 201 W. Main Street.</p>
         </div>
         <ul class="mt-7 flex flex-wrap gap-2.5" aria-label="Events we teach">
@@ -74,9 +100,10 @@ const teams = programs.home.filter((p) => p.team);
   </section>
 
   <!-- 3. Programs & Pricing -->
-  <section class="relative bg-purple-50" aria-labelledby="programs-title">
-    <WaveDivider fill="#F3F0F8" flip class="absolute -top-px left-0 bg-white" />
-    <div class="container-x section">
+  <section class="relative bg-band-teal" aria-labelledby="programs-title">
+    <div class="bg-dots-teal pointer-events-none absolute inset-0" aria-hidden="true"></div>
+    <WaveDivider fill="#E3F1F3" class="relative -mt-px bg-band" />
+    <div class="container-x section relative pt-8 lg:pt-12">
       <div class="reveal flex flex-col items-start gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <p class="eyebrow">What we offer</p>
@@ -87,8 +114,8 @@ const teams = programs.home.filter((p) => p.team);
       <!-- Age ranges here differ from Classes Offered (build script 15 Q2); shown as-is. -->
       <Placeholder note="age ranges on this list differ from the Classes Offered page (e.g. Pre-School 'ages 2-4's' vs 'Ages 2-3 & 3-4'; Recreational 'ages 5 and older' vs 'Ages 4-18'). Which is current?" />
       <ul class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3" data-stagger>
-        {main.map((p) => (
-          <li class="card lift reveal flex flex-col overflow-hidden">
+        {main.map((p, i) => (
+          <li class={`card lift reveal flex flex-col overflow-hidden ${['card-top-plum', 'card-top-teal', 'card-top-sunny', 'card-top-purple', 'card-top-plum'][i % 5]}`}>
             <a href={p.href} class="group block aspect-[16/10] overflow-hidden" tabindex="-1" aria-hidden="true">
               <Img src={p.image!} alt="" sizes="(min-width:1024px) 380px, (min-width:768px) 45vw, 92vw" maxWidth={800} class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
             </a>
@@ -109,10 +136,10 @@ const teams = programs.home.filter((p) => p.team);
         ))}
         <li class="flex flex-col gap-6">
           {teams.map((t) => (
-            <a href={t.href} class="card lift reveal group flex flex-1 items-center gap-4 border-transparent bg-plum-50 p-6 no-underline">
-              <span class="icon-circle bg-white"><Icon name="trophy" /></span>
-              <h3 class="flex-1 text-xl">{t.title}</h3>
-              <Icon name="arrow-right" class="text-teal-700 transition-transform group-hover:translate-x-1" />
+            <a href={t.href} class="card lift reveal group flex flex-1 items-center gap-4 border-transparent bg-gym-purple p-6 text-white no-underline">
+              <span class="icon-circle bg-sunny text-gym-purple"><Icon name="trophy" /></span>
+              <h3 class="flex-1 text-xl text-white">{t.title}</h3>
+              <Icon name="arrow-right" class="text-sunny transition-transform group-hover:translate-x-1" />
             </a>
           ))}
         </li>
@@ -122,11 +149,11 @@ const teams = programs.home.filter((p) => p.team);
         <a href="/tuition-and-policies" class="link inline-flex min-h-11 items-center gap-1">Tuition &amp; Policies <Icon name="arrow-right" size={16} /></a>
       </div>
     </div>
-    <WaveDivider fill="#ffffff" />
+    <WaveDivider fill="#F6E9F3" class="relative" />
   </section>
 
   <!-- 4. More fun at the gym -->
-  <section class="section pt-10" aria-labelledby="fun-title">
+  <section class="section bg-band-plum pt-10" aria-labelledby="fun-title">
     <div class="container-x">
       <div class="reveal relative">
         <p class="eyebrow">Events</p>
@@ -142,7 +169,8 @@ const teams = programs.home.filter((p) => p.team);
   </section>
 
   <!-- 5. Visit us -->
-  <section class="section bg-white pt-4" aria-labelledby="visit-title">
+  <WaveDivider fill="#EEE5F6" class="bg-band-plum" />
+  <section class="section bg-band pt-4" aria-labelledby="visit-title">
     <div class="container-x grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
       <div class="reveal">
         <p class="eyebrow">Come see us</p>
